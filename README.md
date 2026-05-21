@@ -1,48 +1,56 @@
-# Project Template
+# PlayChords
 
-This repository is a lightweight starting point for new projects.
+An Android app that plays chord progressions. Choose a progression, key, and tempo, then listen as each chord is played through the sequence twice. A random mode picks everything for you automatically.
 
-It is intended to provide a small amount of durable project structure without adding placeholder files that need to be cleaned up later.
+## Features
 
-## Purpose
+- 25 chord progressions across three categories: Classic/Standard, Musical Theatre/Jazz, and Expressive/Color
+- 12 major keys
+- Tempos from 50 to 120 BPM
+- Synthesized audio via `AudioTrack` — no sample assets required
+- Random mode: one tap picks a progression, key, and tempo and goes straight to playback
 
-This template is meant to give new projects:
+## Screens
 
-- a standard project context entry point in `AGENTS.md`
-- compatibility with workflows that use `CLAUDE.md` as a project context file
-- a lightweight planning workflow in `doc/planning/DevelopmentProcess.md`
-- a default `DevCycleTemplate.md` that projects may keep or adjust
-- a clean foundation that can be adapted without unnecessary template residue
+1. **Main** — choose between Select Progression and Random Progression
+2. **Select Progression** — scrollable list grouped by category, with tags shown for each progression
+3. **Select Key** — grid of the 12 major keys
+4. **Select Tempo** — picker for 8 BPM options
+5. **Playback** — shows the current chord, progression name, key, and tempo; Play Again and Back to Main when done
 
-## Agent Context Standard
+## Tech Stack
 
-`AGENTS.md` is intended to be the standard first-read document for agents with little or no project context.
+- Kotlin, Jetpack Compose, single-Activity architecture
+- Navigation Compose, ViewModel, Coroutines
+- `AudioTrack` for sine-wave chord synthesis
+- Min SDK 26, Target SDK 35 (Android 15)
+- AGP 8.11.2 / Gradle 8.13 / JDK 21
 
-When starting work in a project created from this template, users should direct agents to read `AGENTS.md` first.
+## Building
 
-This is intended to be the standard across all projects created from this template.
+Requires JDK 21. JDK 24+ is not compatible with the current AGP version.
 
-## Important
+```
+./gradlew assembleDebug
+```
 
-When you create a real project from this template, you should replace this `README.md` with a project-specific README.
+Run unit tests:
 
-This is the one document in the template that is expected to be fully overwritten for the new project.
+```
+./gradlew testDebugUnitTest
+```
 
-## Getting Started
+## Project Structure
 
-After creating a new project from this template:
+```
+app/src/main/java/com/playchords/
+  audio/          AudioEngine — chord synthesis and playback sequencing
+  data/           ChordProgressions (the full list), ChordMapper (roman numeral → chord name)
+  model/          ChordProgression, ProgressionTag
+  ui/             Composable screens and theme
+  viewmodel/      PlaybackViewModel, SelectionViewModel
+```
 
-1. Overwrite `README.md` with the actual project description.
-2. Tell agents with no context to read `AGENTS.md` before starting work.
-3. Update `AGENTS.md` with project-specific context as needed.
-4. Review `DevCycleTemplate.md` and keep it as-is or adjust it for the new project.
-5. If your workflow uses `CLAUDE.md`, keep it aligned with `AGENTS.md` or adapt as needed for Claude Code.
-6. Continue using `doc/planning/DevelopmentProcess.md` as the basis for planning and execution.
+## Development
 
-## Project Owner Responsibility
-
-The template includes a `DevCycleTemplate.md` file for new projects to use as a starting point.
-
-The project owner may keep that template as-is or adjust it to better fit the project's planning style.
-
-`doc/planning/DevelopmentProcess.md` describes how DevCycle documents are used, while `DevCycleTemplate.md` provides the default starting structure.
+See `doc/planning/DevelopmentProcess.md` for the planning and dev cycle workflow.
