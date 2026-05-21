@@ -1,0 +1,25 @@
+# Build outputs
+/build/
+app/build/
+
+# Gradle
+.gradle/
+
+# Local configuration (machine-specific)
+local.properties
+
+# Android Studio / IntelliJ IDEA
+.idea/caches/
+.idea/deploymentTargetSelector.xml
+.idea/deviceManager.xml
+.idea/migrations.xml
+.idea/workspace.xml
+.idea/shelf/
+*.iml
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db
