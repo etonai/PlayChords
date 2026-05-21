@@ -1,22 +1,65 @@
 package com.playchords.audio
 
+import android.content.Context
 import android.media.AudioAttributes
-import android.media.AudioFormat
-import android.media.AudioTrack
+import android.media.SoundPool
 import kotlinx.coroutines.delay
-import kotlin.math.PI
 import kotlin.math.pow
-import kotlin.math.sin
 
-class AudioEngine {
+class AudioEngine(context: Context) {
 
-    private val sampleRate = 44100
+    private val assetManager = context.assets
+
+    private val soundPool = SoundPool.Builder()
+        .setMaxStreams(8)
+        .setAudioAttributes(
+            AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build()
+        )
+        .build()
+
+    // Four base samples: C4, Eb4 (Ds4), Gb4 (Fs4), A4
+    private val baseNoteFiles = listOf("C4.ogg", "Ds4.ogg", "Fs4.ogg", "A4.ogg")
+    private val baseSoundIds = IntArray(4)
+
+    @Volatile private var loadedCount = 0
+
+    // For each semitone (0=C … 11=B): which base sample index and how many semitones above it
+    private val semitoneToBase = arrayOf(
+        0 to 0,  // C  = C4  + 0
+        0 to 1,  // Db = C4  + 1
+        0 to 2,  // D  = C4  + 2
+        1 to 0,  // Eb = Eb4 + 0
+        1 to 1,  // E  = Eb4 + 1
+        1 to 2,  // F  = Eb4 + 2
+        2 to 0,  // Gb = Gb4 + 0
+        2 to 1,  // G  = Gb4 + 1
+        2 to 2,  // Ab = Gb4 + 2
+        3 to 0,  // A  = A4  + 0
+        3 to 1,  // Bb = A4  + 1
+        3 to 2   // B  = A4  + 2
+    )
 
     private val noteToSemitone = mapOf(
         "C" to 0, "C#" to 1, "Db" to 1, "D" to 2, "D#" to 3, "Eb" to 3,
         "E" to 4, "F" to 5, "F#" to 6, "Gb" to 6, "G" to 7, "G#" to 8,
         "Ab" to 8, "A" to 9, "A#" to 10, "Bb" to 10, "B" to 11
     )
+
+    init {
+        soundPool.setOnLoadCompleteListener { _, _, status ->
+            if (status == 0) loadedCount++
+        }
+        baseNoteFiles.forEachIndexed { i, filename ->
+            baseSoundIds[i] = soundPool.load(assetManager.openFd("notes/$filename"), 1)
+        }
+    }
+
+    private suspend fun awaitLoaded() {
+        while (loadedCount < baseNoteFiles.size) delay(50)
+    }
 
     private data class ParsedChord(
         val rootSemitone: Int,
@@ -41,13 +84,13 @@ class AudioEngine {
         val rootSemitone = noteToSemitone[root] ?: return null
 
         val intervals = when {
-            quality.endsWith("maj7")              -> listOf(0, 4, 7, 11)
-            quality.endsWith("7b5")               -> listOf(0, 3, 6, 10)
-            quality.endsWith("dim")               -> listOf(0, 3, 6)
-            quality.endsWith("sus4")              -> listOf(0, 5, 7)
+            quality.endsWith("maj7")                           -> listOf(0, 4, 7, 11)
+            quality.endsWith("7b5")                            -> listOf(0, 3, 6, 10)
+            quality.endsWith("dim")                            -> listOf(0, 3, 6)
+            quality.endsWith("sus4")                           -> listOf(0, 5, 7)
             quality.endsWith("7") && !quality.contains("maj") -> listOf(0, 4, 7, 10)
-            quality.startsWith("m")               -> listOf(0, 3, 7)
-            else                                  -> listOf(0, 4, 7)
+            quality.startsWith("m")                            -> listOf(0, 3, 7)
+            else                                               -> listOf(0, 4, 7)
         }
 
         val bassSemitone = bassNoteStr?.let { noteToSemitone[it] }
@@ -55,79 +98,30 @@ class AudioEngine {
         return ParsedChord(rootSemitone, intervals, bassSemitone)
     }
 
-    private fun semitoneToFrequency(semitone: Int, octave: Int): Double {
-        val midiNote = semitone + (octave + 1) * 12
-        return 440.0 * 2.0.pow((midiNote - 69) / 12.0)
-    }
-
-    private fun generateSamples(frequencies: List<Double>, durationMs: Long): ShortArray {
-        val numSamples = (sampleRate * durationMs / 1000).toInt()
-        val amplitude = (Short.MAX_VALUE * 0.6 / frequencies.size).toInt()
-        val fadeIn = (sampleRate * 0.015).toInt()
-        val fadeOut = (sampleRate * 0.08).toInt()
-
-        return ShortArray(numSamples) { i ->
-            val t = i.toDouble() / sampleRate
-            var sample = 0.0
-            for (freq in frequencies) {
-                sample += sin(2 * PI * freq * t)
-            }
-            val envelope = when {
-                i < fadeIn                -> i.toDouble() / fadeIn
-                i > numSamples - fadeOut  -> (numSamples - i).toDouble() / fadeOut
-                else                      -> 1.0
-            }.coerceIn(0.0, 1.0)
-            (sample / frequencies.size * amplitude * envelope)
-                .toInt()
-                .coerceIn(Short.MIN_VALUE.toInt(), Short.MAX_VALUE.toInt())
-                .toShort()
-        }
+    private fun playNote(semitone: Int, octaveRate: Float, volume: Float) {
+        val (baseIdx, offset) = semitoneToBase[semitone % 12]
+        val rate = (2.0.pow(offset / 12.0) * octaveRate).toFloat().coerceIn(0.5f, 2.0f)
+        soundPool.play(baseSoundIds[baseIdx], volume, volume, 1, 0, rate)
     }
 
     suspend fun playChord(chordName: String, durationMs: Long) {
+        awaitLoaded()
         val parsed = parseChord(chordName) ?: return
-        val frequencies = mutableListOf<Double>()
 
+        // Bass note one octave below chord tones (rate 0.5 = one octave down)
         parsed.bassSemitone?.let { bass ->
-            frequencies.add(semitoneToFrequency(bass, octave = 3))
+            playNote(bass, 0.5f, 0.7f)
         }
 
+        // All chord tones voiced in octave 4
         for (interval in parsed.intervals) {
-            val abs = parsed.rootSemitone + interval
-            frequencies.add(semitoneToFrequency(abs % 12, octave = 4 + abs / 12))
+            playNote((parsed.rootSemitone + interval) % 12, 1.0f, 1.0f)
         }
 
-        val samples = generateSamples(frequencies, durationMs)
-
-        val audioTrack = AudioTrack.Builder()
-            .setAudioAttributes(
-                AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .build()
-            )
-            .setAudioFormat(
-                AudioFormat.Builder()
-                    .setSampleRate(sampleRate)
-                    .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
-                    .setChannelMask(AudioFormat.CHANNEL_OUT_MONO)
-                    .build()
-            )
-            .setBufferSizeInBytes(samples.size * 2)
-            .setTransferMode(AudioTrack.MODE_STATIC)
-            .build()
-
-        try {
-            audioTrack.write(samples, 0, samples.size)
-            audioTrack.play()
-            delay(durationMs)
-        } finally {
-            audioTrack.stop()
-            audioTrack.release()
-        }
+        delay(durationMs)
     }
 
     fun release() {
-        // AudioTrack instances are released per-chord in playChord's finally block
+        soundPool.release()
     }
 }

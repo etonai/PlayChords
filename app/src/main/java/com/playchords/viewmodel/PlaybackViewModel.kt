@@ -1,6 +1,7 @@
 package com.playchords.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.playchords.audio.AudioEngine
 import kotlinx.coroutines.Dispatchers
@@ -19,9 +20,9 @@ data class PlaybackState(
     val totalLoops: Int = 2
 )
 
-class PlaybackViewModel : ViewModel() {
+class PlaybackViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val audioEngine = AudioEngine()
+    private val audioEngine = AudioEngine(application)
     private var playbackJob: Job? = null
     private var lastChords: List<String> = emptyList()
     private var lastBpm: Int = 80
