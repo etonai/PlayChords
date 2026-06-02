@@ -2,6 +2,7 @@ package com.playchords.data
 
 import com.playchords.model.ComedySection
 import com.playchords.model.ComedySong
+import com.playchords.model.ProgressionTag.*
 
 object ComedyGenerator {
 
@@ -11,11 +12,11 @@ object ComedyGenerator {
         val key = keys.random()
         val modulatedKey = ChordMapper.keyOneWholeStepHigher(key)!!
 
-        val chorusNumerals = ComedyProgressions.chorus.random()
-        val verseNumerals = ComedyProgressions.verse.random()
-        val bridgeNumerals = ComedyProgressions.bridge.random()
-        val chorusResolutionNumerals = ComedyProgressions.sectionResolution.random()
-        val verseResolutionNumerals = ComedyProgressions.sectionResolution.random()
+        val chorusNumerals = progressionsByTag(COMEDY_CHORUS).random()
+        val verseNumerals = progressionsByTag(COMEDY_VERSE).random()
+        val bridgeNumerals = progressionsByTag(COMEDY_BRIDGE).random()
+        val chorusResolutionNumerals = progressionsByTag(SECTION_RESOLUTION).random()
+        val verseResolutionNumerals = progressionsByTag(SECTION_RESOLUTION).random()
 
         return ComedySong(
             key = key,

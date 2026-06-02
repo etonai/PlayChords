@@ -2,6 +2,7 @@ package com.playchords.data
 
 import com.playchords.model.IWantSection
 import com.playchords.model.IWantSong
+import com.playchords.model.ProgressionTag.*
 
 object IWantGenerator {
 
@@ -12,10 +13,10 @@ object IWantGenerator {
         return IWantSong(
             key = key,
             sections = listOf(
-                buildSection("Opening", IWantProgressions.opening, key),
-                buildSection("Main Body", IWantProgressions.mainBody, key),
-                buildSection("Desire Statement", IWantProgressions.bigStatement, key),
-                buildSection("Climax", IWantProgressions.climax, key)
+                buildSection("Opening", progressionsByTag(IWANT_OPENING), key),
+                buildSection("Main Body", progressionsByTag(IWANT_MAIN), key),
+                buildSection("Desire Statement", progressionsByTag(IWANT_DESIRE), key),
+                buildSection("Climax", progressionsByTag(IWANT_CLIMAX), key)
             )
         )
     }

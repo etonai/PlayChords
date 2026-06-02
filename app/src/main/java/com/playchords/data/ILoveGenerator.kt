@@ -2,6 +2,7 @@ package com.playchords.data
 
 import com.playchords.model.ILoveSection
 import com.playchords.model.ILoveSong
+import com.playchords.model.ProgressionTag.*
 
 object ILoveGenerator {
 
@@ -12,10 +13,10 @@ object ILoveGenerator {
         return ILoveSong(
             key = key,
             sections = listOf(
-                buildSection("Opening", ILoveProgressions.opening, key),
-                buildSection("Main Love Theme", ILoveProgressions.story, key),
-                buildSection("Variant Love Theme", ILoveProgressions.declaration, key, isOptional = true),
-                buildSection("Climax", ILoveProgressions.finale, key)
+                buildSection("Opening", progressionsByTag(ILOVE_OPENING), key),
+                buildSection("Main Love Theme", progressionsByTag(ILOVE_MAIN_LOVE_THEME), key),
+                buildSection("Variant Love Theme", progressionsByTag(ILOVE_VARIANT_LOVE_THEME), key, isOptional = true),
+                buildSection("Climax", progressionsByTag(ILOVE_CLIMAX), key)
             )
         )
     }
