@@ -18,7 +18,8 @@ fun MainScreen(
     onSelectProgression: () -> Unit,
     onRandomProgression: () -> Unit,
     onPlayChords: () -> Unit,
-    onRandomIWant: () -> Unit
+    onRandomIWant: () -> Unit,
+    onRandomILove: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -107,6 +108,20 @@ fun MainScreen(
             ) {
                 Text(
                     text = "Random I Want",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            OutlinedButton(
+                onClick = onRandomILove,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Text(
+                    text = "Random I Love",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary
