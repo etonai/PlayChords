@@ -9,35 +9,44 @@ class ComedyGeneratorTest {
     private val validKeys = listOf("C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B")
 
     @Test
-    fun `generated song has exactly 4 sections`() {
-        assertEquals(4, ComedyGenerator.generate().sections.size)
+    fun `generated song has exactly 7 sections`() {
+        assertEquals(7, ComedyGenerator.generate().sections.size)
     }
 
     @Test
     fun `section labels are correct and in order`() {
         val sections = ComedyGenerator.generate().sections
         assertEquals("Chorus", sections[0].label)
-        assertEquals("Verse", sections[1].label)
-        assertEquals("Bridge", sections[2].label)
-        assertEquals("Modulated Chorus", sections[3].label)
+        assertEquals("Chorus Resolution", sections[1].label)
+        assertEquals("Verse", sections[2].label)
+        assertEquals("Verse Resolution", sections[3].label)
+        assertEquals("Bridge", sections[4].label)
+        assertEquals("Modulated Chorus", sections[5].label)
+        assertEquals("Modulated Chorus Resolution", sections[6].label)
     }
 
     @Test
-    fun `only the Modulated Chorus section has isModulated true`() {
+    fun `only Modulated Chorus and Modulated Chorus Resolution have isModulated true`() {
         val sections = ComedyGenerator.generate().sections
         assertFalse(sections[0].isModulated)
         assertFalse(sections[1].isModulated)
         assertFalse(sections[2].isModulated)
-        assertTrue(sections[3].isModulated)
+        assertFalse(sections[3].isModulated)
+        assertFalse(sections[4].isModulated)
+        assertTrue(sections[5].isModulated)
+        assertTrue(sections[6].isModulated)
     }
 
     @Test
-    fun `only the Modulated Chorus section is optional`() {
+    fun `optional flags are correct for all sections`() {
         val sections = ComedyGenerator.generate().sections
-        assertFalse(sections[0].isOptional)
-        assertFalse(sections[1].isOptional)
-        assertFalse(sections[2].isOptional)
-        assertTrue(sections[3].isOptional)
+        assertFalse(sections[0].isOptional) // Chorus
+        assertTrue(sections[1].isOptional)  // Chorus Resolution
+        assertFalse(sections[2].isOptional) // Verse
+        assertTrue(sections[3].isOptional)  // Verse Resolution
+        assertTrue(sections[4].isOptional)  // Bridge
+        assertTrue(sections[5].isOptional)  // Modulated Chorus
+        assertTrue(sections[6].isOptional)  // Modulated Chorus Resolution
     }
 
     @Test
@@ -78,17 +87,25 @@ class ComedyGeneratorTest {
     @Test
     fun `chorus and modulated chorus share the same roman numerals`() {
         val sections = ComedyGenerator.generate().sections
-        val chorus = sections[0]
-        val modulatedChorus = sections[3]
-        assertEquals(chorus.romanNumerals, modulatedChorus.romanNumerals)
+        assertEquals(sections[0].romanNumerals, sections[5].romanNumerals)
     }
 
     @Test
     fun `chorus and modulated chorus have different rendered chords`() {
         val sections = ComedyGenerator.generate().sections
-        val chorus = sections[0]
-        val modulatedChorus = sections[3]
-        assertNotEquals(chorus.chords, modulatedChorus.chords)
+        assertNotEquals(sections[0].chords, sections[5].chords)
+    }
+
+    @Test
+    fun `chorus resolution and modulated chorus resolution share the same roman numerals`() {
+        val sections = ComedyGenerator.generate().sections
+        assertEquals(sections[1].romanNumerals, sections[6].romanNumerals)
+    }
+
+    @Test
+    fun `chorus resolution and modulated chorus resolution have different rendered chords`() {
+        val sections = ComedyGenerator.generate().sections
+        assertNotEquals(sections[1].chords, sections[6].chords)
     }
 
     @Test

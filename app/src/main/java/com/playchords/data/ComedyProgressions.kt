@@ -28,4 +28,17 @@ object ComedyProgressions {
         listOf("vi", "ii", "IV", "V"),
         listOf("I", "IV", "I", "ii", "V")
     )
+
+    val sectionResolution: List<List<String>> = listOf(
+        listOf("ii", "V", "I", "I"),
+        listOf("IV", "V", "I", "I"),
+        listOf("vi", "IV", "V", "I"),
+        listOf("IV", "I", "I", "I"),
+        listOf("V", "V", "I", "I"),
+        listOf("I", "vi", "V", "I"),
+        listOf("ii", "IV", "V", "I"),
+        listOf("I", "V", "I", "I"),
+        listOf("iii", "vi", "V", "I"),
+        listOf("vi", "ii", "V", "I")
+    )
 }
