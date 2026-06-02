@@ -4,14 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.playchords.BuildConfig
 import com.playchords.ui.theme.MutedText
 
 @Composable
@@ -21,11 +20,6 @@ fun MainScreen(
     onPlayChords: () -> Unit,
     onRandomIWant: () -> Unit
 ) {
-    val context = LocalContext.current
-    val versionName = remember {
-        context.packageManager.getPackageInfo(context.packageName, 0).versionName
-    }
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -53,7 +47,7 @@ fun MainScreen(
             )
 
             Text(
-                text = "v$versionName",
+                text = "v${BuildConfig.VERSION_NAME}",
                 style = MaterialTheme.typography.labelSmall,
                 color = MutedText.copy(alpha = 0.5f),
                 textAlign = TextAlign.Center
