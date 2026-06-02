@@ -126,6 +126,7 @@ private fun TagChip(tag: ProgressionTag) {
         ProgressionTag.OPEN      -> "OPEN"
         ProgressionTag.PIVOT     -> "PIVOT"
         ProgressionTag.COLOR     -> "COLOR"
+        else                     -> return
     }
     Surface(
         color = SurfaceColor,

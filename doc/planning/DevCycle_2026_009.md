@@ -21,17 +21,17 @@ Three separate progression files (`IWantProgressions.kt`, `ILoveProgressions.kt`
 
 ### Phase 1: Tags and Master List
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] In `model/ProgressionTag.kt`: add 12 section-based tags
+- [x] In `model/ProgressionTag.kt`: add 12 section-based tags
   - `IWANT_OPENING`, `IWANT_MAIN`, `IWANT_DESIRE`, `IWANT_CLIMAX`
   - `ILOVE_OPENING`, `ILOVE_MAIN_LOVE_THEME`, `ILOVE_VARIANT_LOVE_THEME`, `ILOVE_CLIMAX`
   - `COMEDY_CHORUS`, `COMEDY_VERSE`, `COMEDY_BRIDGE`
   - `SECTION_RESOLUTION`
-- [ ] In `data/ChordProgressions.kt`: remove the `"Rhythm Changes"` entry (identical numerals to `"Circle Turnaround"` — pre-existing duplicate)
-- [ ] In `data/ChordProgressions.kt`: add section tags to the 9 existing entries that overlap with song-section pools (see Technical Notes)
-- [ ] In `data/ChordProgressions.kt`: add all new progressions not already present (see Technical Notes)
-- [ ] In `data/ChordProgressions.kt`: add `progressionsByTag` helper function
+- [x] In `data/ChordProgressions.kt`: remove the `"Rhythm Changes"` entry (identical numerals to `"Circle Turnaround"` — pre-existing duplicate)
+- [x] In `data/ChordProgressions.kt`: add section tags to the 9 existing entries that overlap with song-section pools (see Technical Notes)
+- [x] In `data/ChordProgressions.kt`: add all new progressions not already present (see Technical Notes)
+- [x] In `data/ChordProgressions.kt`: add `progressionsByTag` helper function
 
 **Technical Notes:**
 
@@ -118,6 +118,9 @@ New progressions to add (use category `"Song / Section"`):
 - `iii vi V I` → SECTION_RESOLUTION
 
 Note: `vi ii V I` (Minor To Resolution) and `ii IV V I` already receive `SECTION_RESOLUTION` in the retag step above.
+
+**Unplanned fix — `ui/SelectProgressionScreen.kt`:**
+The `TagChip` composable used an exhaustive `when` on `ProgressionTag`. Adding the 12 new tags caused a compile error. Fixed by adding `else -> return` so section-routing tags are silently skipped in the chip display. This is correct behavior — section tags are internal and should not appear as UI chips.
 
 Helper function to add to `ChordProgressions.kt`:
 

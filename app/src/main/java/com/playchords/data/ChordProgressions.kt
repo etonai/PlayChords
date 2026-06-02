@@ -12,34 +12,108 @@ private fun prog(
 ) = ChordProgression(name, category, numerals, tags.toList())
 
 val allProgressions: List<ChordProgression> = listOf(
-    prog("Classic Cadence",          "Classic / Standard",     listOf("I", "IV", "V", "I"),              CADENTIAL),
-    prog("Pop Axis",                 "Classic / Standard",     listOf("I", "V", "vi", "IV"),              LIFT, LOOP),
-    prog("Minor Pop Loop",           "Classic / Standard",     listOf("vi", "IV", "I", "V"),              OPEN, LIFT, LOOP),
-    prog("50s Progression",          "Classic / Standard",     listOf("I", "vi", "IV", "V"),              LIFT, LOOP),
-    prog("Plagal Loop",              "Classic / Standard",     listOf("IV", "I", "V", "I"),               CADENTIAL, LIFT),
+
+    // Classic / Standard
+    prog("Classic Cadence",          "Classic / Standard",     listOf("I", "IV", "V", "I"),              CADENTIAL, IWANT_MAIN, ILOVE_MAIN_LOVE_THEME, ILOVE_VARIANT_LOVE_THEME, ILOVE_CLIMAX, COMEDY_CHORUS),
+    prog("Pop Axis",                 "Classic / Standard",     listOf("I", "V", "vi", "IV"),              LIFT, LOOP, IWANT_DESIRE, COMEDY_CHORUS),
+    prog("Minor Pop Loop",           "Classic / Standard",     listOf("vi", "IV", "I", "V"),              OPEN, LIFT, LOOP, IWANT_DESIRE, COMEDY_CHORUS, COMEDY_BRIDGE),
+    prog("50s Progression",          "Classic / Standard",     listOf("I", "vi", "IV", "V"),              LIFT, LOOP, IWANT_MAIN, IWANT_DESIRE, COMEDY_CHORUS, COMEDY_VERSE),
+    prog("Plagal Loop",              "Classic / Standard",     listOf("IV", "I", "V", "I"),               CADENTIAL, LIFT, IWANT_CLIMAX, ILOVE_VARIANT_LOVE_THEME),
     prog("Descending Bass Line",     "Classic / Standard",     listOf("I", "V/7", "vi", "V"),             OPEN, COLOR),
     prog("Axis Variant",             "Classic / Standard",     listOf("vi", "V", "IV", "I"),              CADENTIAL, LIFT),
 
-    prog("Two Five One",             "Musical Theatre / Jazz", listOf("ii", "V", "I"),                    CADENTIAL),
-    prog("Circle Turnaround",        "Musical Theatre / Jazz", listOf("I", "vi", "ii", "V"),              OPEN, CADENTIAL),
-    prog("Extended Turnaround",      "Musical Theatre / Jazz", listOf("iii", "vi", "ii", "V"),            OPEN, PIVOT),
+    // Musical Theatre / Jazz
+    prog("Two Five One",             "Musical Theatre / Jazz", listOf("ii", "V", "I"),                    CADENTIAL, IWANT_CLIMAX, ILOVE_CLIMAX),
+    prog("Circle Turnaround",        "Musical Theatre / Jazz", listOf("I", "vi", "ii", "V"),              OPEN, CADENTIAL, IWANT_MAIN),
+    prog("Extended Turnaround",      "Musical Theatre / Jazz", listOf("iii", "vi", "ii", "V"),            OPEN, PIVOT, COMEDY_BRIDGE),
     prog("Borrowed Minor Four",      "Musical Theatre / Jazz", listOf("I", "Imaj7", "IV", "iv"),          COLOR, PIVOT),
     prog("Dominant Lift Setup",      "Musical Theatre / Jazz", listOf("IV", "I", "II7", "V"),             OPEN, LIFT, PIVOT, COLOR),
     prog("Backdoor Resolution",      "Musical Theatre / Jazz", listOf("ii", "♭VII", "I"),                 CADENTIAL, COLOR),
-    prog("Rhythm Changes",           "Musical Theatre / Jazz", listOf("I", "vi", "ii", "V"),              OPEN, CADENTIAL),
     prog("Minor Two Five One",       "Musical Theatre / Jazz", listOf("iiø", "V7", "i"),                  CADENTIAL, COLOR),
     prog("Chromatic Walk-Up",        "Musical Theatre / Jazz", listOf("I", "I#dim", "ii", "V"),           PIVOT, COLOR),
     prog("Major Six Turnaround",     "Musical Theatre / Jazz", listOf("I", "VI", "ii", "I"),              OPEN, LOOP, COLOR, PIVOT),
 
+    // Expressive / Color
     prog("Secondary Dominant Lift",  "Expressive / Color",     listOf("I", "V/vi", "vi", "IV"),           LIFT, COLOR),
     prog("Major To Minor Four",      "Expressive / Color",     listOf("I", "IV", "iv", "I"),              CADENTIAL, COLOR),
-    prog("Minor To Resolution",      "Expressive / Color",     listOf("vi", "ii", "V", "I"),              CADENTIAL, LIFT),
+    prog("Minor To Resolution",      "Expressive / Color",     listOf("vi", "ii", "V", "I"),              CADENTIAL, LIFT, IWANT_MAIN, SECTION_RESOLUTION),
     prog("Flat Seven Color",         "Expressive / Color",     listOf("I", "♭VII", "IV", "I"),            COLOR, CADENTIAL),
     prog("Line Cliche Major",        "Expressive / Color",     listOf("I", "Imaj7", "I7", "IV"),          OPEN, COLOR, PIVOT),
     prog("Mixolydian Variant",       "Expressive / Color",     listOf("I", "♭VII", "I", "IV"),            COLOR, LOOP),
     prog("Chromatic Mediants",       "Expressive / Color",     listOf("I", "♭III", "IV", "I"),            COLOR, LIFT),
     prog("Deceptive Cycle",          "Expressive / Color",     listOf("V", "vi", "IV", "I"),              CADENTIAL, PIVOT),
+
+    // Song / Section — I Want Opening
+    prog("IWant Opening 1",          "Song / Section",         listOf("I", "vi"),                         IWANT_OPENING, ILOVE_OPENING),
+    prog("IWant Opening 2",          "Song / Section",         listOf("I", "IV"),                         IWANT_OPENING),
+    prog("IWant Opening 3",          "Song / Section",         listOf("I", "vi", "IV"),                   IWANT_OPENING),
+    prog("IWant Opening 4",          "Song / Section",         listOf("vi", "IV"),                        IWANT_OPENING),
+    prog("IWant Opening 5",          "Song / Section",         listOf("I", "iii", "vi"),                  IWANT_OPENING),
+    prog("IWant Opening 6",          "Song / Section",         listOf("I", "vi", "IV", "I"),              IWANT_OPENING),
+
+    // Song / Section — I Want Main
+    prog("IWant Main 1",             "Song / Section",         listOf("I", "IV", "ii", "V"),              IWANT_MAIN, ILOVE_MAIN_LOVE_THEME),
+    prog("IWant Main 2",             "Song / Section",         listOf("I", "iii", "vi", "ii", "V"),       IWANT_MAIN),
+
+    // Song / Section — I Want Desire
+    prog("IWant Desire 1",           "Song / Section",         listOf("IV", "V", "I", "vi"),              IWANT_DESIRE, COMEDY_CHORUS),
+    prog("IWant Desire 2",           "Song / Section",         listOf("I", "IV", "I", "V"),               IWANT_DESIRE, COMEDY_CHORUS, COMEDY_VERSE),
+    prog("IWant Desire 3",           "Song / Section",         listOf("I", "iii", "IV", "V"),             IWANT_DESIRE, ILOVE_MAIN_LOVE_THEME, COMEDY_BRIDGE),
+
+    // Song / Section — I Want Climax
+    prog("IWant Climax 1",           "Song / Section",         listOf("IV", "V", "I"),                    IWANT_CLIMAX, ILOVE_CLIMAX),
+    prog("IWant Climax 2",           "Song / Section",         listOf("IV", "V", "vi", "V", "I"),         IWANT_CLIMAX),
+    prog("IWant Climax 3",           "Song / Section",         listOf("ii", "IV", "V", "I"),              IWANT_CLIMAX, SECTION_RESOLUTION),
+    prog("IWant Climax 4",           "Song / Section",         listOf("IV", "V", "I", "vi", "IV", "V", "I"), IWANT_CLIMAX),
+
+    // Song / Section — I Love Opening
+    prog("ILove Opening 1",          "Song / Section",         listOf("I", "IV", "I"),                    ILOVE_OPENING),
+    prog("ILove Opening 2",          "Song / Section",         listOf("I", "Imaj7", "IV"),                ILOVE_OPENING),
+    prog("ILove Opening 3",          "Song / Section",         listOf("vi", "I", "IV"),                   ILOVE_OPENING),
+    prog("ILove Opening 4",          "Song / Section",         listOf("I", "iii", "IV"),                  ILOVE_OPENING),
+    prog("ILove Opening 5",          "Song / Section",         listOf("I", "IV", "vi", "I"),              ILOVE_OPENING),
+
+    // Song / Section — I Love Main Love Theme
+    prog("ILove Main 1",             "Song / Section",         listOf("IV", "I", "ii", "V"),              ILOVE_MAIN_LOVE_THEME),
+    prog("ILove Main 2",             "Song / Section",         listOf("I", "Imaj7", "IV", "V"),           ILOVE_MAIN_LOVE_THEME),
+    prog("ILove Main 3",             "Song / Section",         listOf("I", "ii", "V", "I"),               ILOVE_MAIN_LOVE_THEME),
+
+    // Song / Section — I Love Variant Love Theme
+    prog("ILove Variant 1",          "Song / Section",         listOf("I", "V", "IV", "I"),               ILOVE_VARIANT_LOVE_THEME, ILOVE_CLIMAX),
+    prog("ILove Variant 2",          "Song / Section",         listOf("IV", "V", "I", "IV"),              ILOVE_VARIANT_LOVE_THEME),
+    prog("ILove Variant 3",          "Song / Section",         listOf("I", "V", "I", "IV"),               ILOVE_VARIANT_LOVE_THEME, COMEDY_VERSE),
+    prog("ILove Variant 4",          "Song / Section",         listOf("I", "IV", "V", "vi"),              ILOVE_VARIANT_LOVE_THEME),
+
+    // Song / Section — I Love Climax
+    prog("ILove Climax 1",           "Song / Section",         listOf("IV", "I", "IV", "V", "I"),         ILOVE_CLIMAX),
+    prog("ILove Climax 2",           "Song / Section",         listOf("I", "IV", "I", "V", "I"),          ILOVE_CLIMAX),
+    prog("ILove Climax 3",           "Song / Section",         listOf("ii", "V", "I", "IV", "I"),         ILOVE_CLIMAX),
+
+    // Song / Section — Comedy Verse
+    prog("Comedy Verse 1",           "Song / Section",         listOf("I", "IV", "V"),                    COMEDY_VERSE),
+    prog("Comedy Verse 2",           "Song / Section",         listOf("I", "IV"),                         COMEDY_VERSE),
+    prog("Comedy Verse 3",           "Song / Section",         listOf("I", "V"),                          COMEDY_VERSE),
+
+    // Song / Section — Comedy Bridge
+    prog("Comedy Bridge 1",          "Song / Section",         listOf("I", "IV", "vi", "V"),              COMEDY_BRIDGE),
+    prog("Comedy Bridge 2",          "Song / Section",         listOf("vi", "ii", "IV", "V"),             COMEDY_BRIDGE),
+    prog("Comedy Bridge 3",          "Song / Section",         listOf("I", "IV", "I", "ii", "V"),         COMEDY_BRIDGE),
+
+    // Song / Section — Section Resolution
+    prog("Resolution 1",             "Song / Section",         listOf("ii", "V", "I", "I"),               SECTION_RESOLUTION),
+    prog("Resolution 2",             "Song / Section",         listOf("IV", "V", "I", "I"),               SECTION_RESOLUTION),
+    prog("Resolution 3",             "Song / Section",         listOf("vi", "IV", "V", "I"),              SECTION_RESOLUTION),
+    prog("Resolution 4",             "Song / Section",         listOf("IV", "I", "I", "I"),               SECTION_RESOLUTION),
+    prog("Resolution 5",             "Song / Section",         listOf("V", "V", "I", "I"),                SECTION_RESOLUTION),
+    prog("Resolution 6",             "Song / Section",         listOf("I", "vi", "V", "I"),               SECTION_RESOLUTION),
+    prog("Resolution 7",             "Song / Section",         listOf("I", "V", "I", "I"),                SECTION_RESOLUTION),
+    prog("Resolution 8",             "Song / Section",         listOf("iii", "vi", "V", "I"),             SECTION_RESOLUTION),
 )
+
+fun progressionsByTag(tag: ProgressionTag): List<List<String>> =
+    allProgressions
+        .filter { tag in it.tags }
+        .map { it.romanNumerals }
 
 val majorKeys = listOf("C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B")
 
