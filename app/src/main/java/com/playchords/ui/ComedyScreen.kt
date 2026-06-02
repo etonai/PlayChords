@@ -13,12 +13,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.playchords.ui.theme.MutedText
-import com.playchords.viewmodel.ILoveViewModel
+import com.playchords.viewmodel.ComedyViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ILoveScreen(
-    viewModel: ILoveViewModel,
+fun ComedyScreen(
+    viewModel: ComedyViewModel,
     onBack: () -> Unit
 ) {
     val song by viewModel.song.collectAsState()
@@ -27,7 +27,7 @@ fun ILoveScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("I Love Song", fontWeight = FontWeight.Bold) },
+                title = { Text("Comedy Song", fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = {
                         viewModel.stopPlayback()
@@ -129,12 +129,22 @@ fun ILoveScreen(
                             }
                         }
                     }
-                    Text(
-                        text = section.chords.joinToString(" – "),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = if (isPlaying) MaterialTheme.colorScheme.primary else MutedText,
-                        fontWeight = if (isPlaying) FontWeight.SemiBold else FontWeight.Normal
-                    )
+
+                    Column {
+                        Text(
+                            text = section.chords.joinToString(" – "),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = if (isPlaying) MaterialTheme.colorScheme.primary else MutedText,
+                            fontWeight = if (isPlaying) FontWeight.SemiBold else FontWeight.Normal
+                        )
+                        if (section.isModulated) {
+                            Text(
+                                text = "(${song.modulatedKey})",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MutedText
+                            )
+                        }
+                    }
                 }
             }
         }

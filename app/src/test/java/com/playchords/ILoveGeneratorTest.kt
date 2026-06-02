@@ -17,9 +17,18 @@ class ILoveGeneratorTest {
     fun `section labels are correct and in order`() {
         val sections = ILoveGenerator.generate().sections
         assertEquals("Opening", sections[0].label)
-        assertEquals("Story", sections[1].label)
-        assertEquals("Declaration", sections[2].label)
-        assertEquals("Finale", sections[3].label)
+        assertEquals("Main Love Theme", sections[1].label)
+        assertEquals("Variant Love Theme", sections[2].label)
+        assertEquals("Climax", sections[3].label)
+    }
+
+    @Test
+    fun `only the Variant Love Theme section is optional`() {
+        val sections = ILoveGenerator.generate().sections
+        assertFalse(sections[0].isOptional)
+        assertFalse(sections[1].isOptional)
+        assertTrue(sections[2].isOptional)
+        assertFalse(sections[3].isOptional)
     }
 
     @Test

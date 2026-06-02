@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.playchords.ui.*
 import com.playchords.viewmodel.ChordPlayerViewModel
+import com.playchords.viewmodel.ComedyViewModel
 import com.playchords.viewmodel.ILoveViewModel
 import com.playchords.viewmodel.IWantViewModel
 import com.playchords.viewmodel.PlaybackViewModel
@@ -36,7 +37,18 @@ fun PlayChordsNavHost() {
                 },
                 onRandomILove = {
                     navController.navigate("ilove")
+                },
+                onRandomComedy = {
+                    navController.navigate("comedy")
                 }
+            )
+        }
+
+        composable("comedy") {
+            val comedyViewModel: ComedyViewModel = viewModel()
+            ComedyScreen(
+                viewModel = comedyViewModel,
+                onBack = { navController.popBackStack() }
             )
         }
 

@@ -1,13 +1,15 @@
 package com.playchords.model
 
-data class ILoveSection(
+data class ComedySection(
     val label: String,
     val romanNumerals: List<String>,
     val chords: List<String>,
+    val isModulated: Boolean = false,
     val isOptional: Boolean = false
 )
 
-data class ILoveSong(
+data class ComedySong(
     val key: String,
-    val sections: List<ILoveSection>
+    val modulatedKey: String,
+    val sections: List<ComedySection>
 )

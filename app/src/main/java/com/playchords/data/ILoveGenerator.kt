@@ -13,19 +13,20 @@ object ILoveGenerator {
             key = key,
             sections = listOf(
                 buildSection("Opening", ILoveProgressions.opening, key),
-                buildSection("Story", ILoveProgressions.story, key),
-                buildSection("Declaration", ILoveProgressions.declaration, key),
-                buildSection("Finale", ILoveProgressions.finale, key)
+                buildSection("Main Love Theme", ILoveProgressions.story, key),
+                buildSection("Variant Love Theme", ILoveProgressions.declaration, key, isOptional = true),
+                buildSection("Climax", ILoveProgressions.finale, key)
             )
         )
     }
 
-    private fun buildSection(label: String, pool: List<List<String>>, key: String): ILoveSection {
+    private fun buildSection(label: String, pool: List<List<String>>, key: String, isOptional: Boolean = false): ILoveSection {
         val numerals = pool.random()
         return ILoveSection(
             label = label,
             romanNumerals = numerals,
-            chords = ChordMapper.renderNumerals(key, numerals)
+            chords = ChordMapper.renderNumerals(key, numerals),
+            isOptional = isOptional
         )
     }
 }
