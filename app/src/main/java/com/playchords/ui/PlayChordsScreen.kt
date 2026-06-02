@@ -2,11 +2,13 @@ package com.playchords.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -37,45 +39,47 @@ fun PlayChordsScreen(
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(3),
+        LazyColumn(
             contentPadding = PaddingValues(
                 start = 12.dp,
                 end = 12.dp,
                 top = padding.calculateTopPadding() + 4.dp,
                 bottom = 16.dp
             ),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            PlayableChords.groups.forEach { group ->
-                item(span = { GridItemSpan(maxLineSpan) }) {
+            items(PlayableChords.groups) { group ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
                     Text(
                         text = group.root,
                         style = MaterialTheme.typography.labelLarge,
                         fontWeight = FontWeight.Bold,
                         color = MutedText,
-                        modifier = Modifier.padding(top = 12.dp, bottom = 2.dp)
+                        modifier = Modifier.width(28.dp)
                     )
-                }
-                items(group.chords) { chord ->
-                    OutlinedButton(
-                        onClick = { viewModel.playChord(chord) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(52.dp),
-                        contentPadding = PaddingValues(horizontal = 4.dp, vertical = 0.dp)
-                    ) {
-                        Text(
-                            text = chord,
-                            fontSize = 13.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colorScheme.primary,
-                            maxLines = 1
-                        )
+                    group.chords.forEach { chord ->
+                        OutlinedButton(
+                            onClick = { viewModel.playChord(chord) },
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(40.dp),
+                            contentPadding = PaddingValues(horizontal = 2.dp, vertical = 0.dp)
+                        ) {
+                            Text(
+                                text = chord,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = MaterialTheme.colorScheme.primary,
+                                maxLines = 1
+                            )
+                        }
                     }
                 }
             }

@@ -1,6 +1,6 @@
 # DevCycle 2026-003: Play Chords Screen
 
-**Status:** Work Complete
+**Status:** VERIFIED
 **Start Date:** 2026-06-02
 **Target Completion:** TBD
 **Focus:** Add a "Play Chords" entry point on the main screen that lets the user tap any chord and hear it immediately.
@@ -86,6 +86,17 @@ A "Play Chords" button appears on the main screen alongside the existing two but
 - [x] Run `./gradlew testDebugUnitTest` — all 15 tests passing (9 existing + 6 new)
 - [x] Add unit tests for `PlayableChords`: 6 tests covering non-empty, known chord names, all 12 roots present, no duplicates
 - [ ] Manual or emulator smoke test: tap "Play Chords" from main, verify screen opens; tap a chord, verify audio; tap back, verify return to main
+
+---
+
+### Phase 6: Chord Button Width Reduction
+
+**Status:** Work Complete
+
+- [x] Reduce each chord button width to 50% of its grid cell by changing `fillMaxWidth()` to `fillMaxWidth(0.5f)` in `PlayChordsScreen.kt`
+
+**Technical Notes:**
+`LazyVerticalGrid` measures items with exact constraints (min = max = cell width), so `fillMaxWidth(fraction)` is a no-op — the minimum constraint forces items to fill the cell regardless of fraction. The fix wraps each button in a `Box(Modifier.fillMaxWidth())`, which gives its children loose constraints (min = 0, max = cell width). `fillMaxWidth(0.5f)` on the button inside the Box then correctly resolves to half the cell width.
 
 ---
 
