@@ -15,7 +15,8 @@ import com.playchords.ui.theme.MutedText
 @Composable
 fun MainScreen(
     onSelectProgression: () -> Unit,
-    onRandomProgression: () -> Unit
+    onRandomProgression: () -> Unit,
+    onPlayChords: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -69,6 +70,20 @@ fun MainScreen(
             ) {
                 Text(
                     text = "Random Progression",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            OutlinedButton(
+                onClick = onPlayChords,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Text(
+                    text = "Play Chords",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary
