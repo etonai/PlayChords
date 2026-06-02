@@ -106,6 +106,11 @@ object ChordMapper {
         return supportedMajorKeys[(index + 2) % supportedMajorKeys.size]
     }
 
+    fun renderNumerals(key: String, numerals: List<String>): List<String> {
+        val chords = keyMap[key] ?: return emptyList()
+        return numerals.map { numeral -> chords[numeral] ?: numeral }
+    }
+
     fun renderProgressionOneWholeStepHigher(
         key: String,
         progression: ChordProgression

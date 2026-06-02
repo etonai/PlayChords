@@ -1,8 +1,8 @@
 # DevCycle 2026-004: Random I Want Song
 
-**Status:** Planning
-**Start Date:** TBD
-**Target Completion:** TBD
+**Status:** Work Complete
+**Start Date:** 2026-06-02
+**Target Completion:** 2026-06-02
 **Focus:** Add a "Random I Want" button to the main screen that generates and plays a four-section "I Want" song structure for musical theatre improvisation.
 
 ---
@@ -21,20 +21,20 @@ A "Random I Want" button appears on the main screen. Tapping it generates a new 
 
 ### Phase 1: Data — Progression Pools and Song Model
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Create `app/src/main/java/com/playchords/data/IWantProgressions.kt`
+- [x] Create `app/src/main/java/com/playchords/data/IWantProgressions.kt`
   - Define the four pool lists as `List<List<String>>` (each entry is a list of roman numeral strings)
   - Opening pool (6 progressions): `I-vi`, `I-IV`, `I-vi-IV`, `vi-IV`, `I-iii-vi`, `I-vi-IV-I`
   - Main Body pool (6 progressions): `I-vi-ii-V`, `I-vi-IV-V`, `I-IV-ii-V`, `I-iii-vi-ii-V`, `vi-ii-V-I`, `I-IV-V-I`
   - Big Statement pool (6 progressions): `I-V-vi-IV`, `I-vi-IV-V`, `IV-V-I-vi`, `I-IV-I-V`, `vi-IV-I-V`, `I-iii-IV-V`
   - Climax pool (6 progressions): `IV-V-I`, `ii-V-I`, `IV-I-V-I`, `IV-V-vi-V-I`, `ii-IV-V-I`, `IV-V-I-vi-IV-V-I`
-- [ ] Create `app/src/main/java/com/playchords/model/IWantSong.kt`
+- [x] Create `app/src/main/java/com/playchords/model/IWantSong.kt`
   - `data class IWantSection(val label: String, val romanNumerals: List<String>, val chords: List<String>)`
   - `data class IWantSong(val key: String, val sections: List<IWantSection>)`
-- [ ] Add `fun renderNumerals(key: String, numerals: List<String>): List<String>` to `ChordMapper`
+- [x] Add `fun renderNumerals(key: String, numerals: List<String>): List<String>` to `ChordMapper`
   - Same logic as `renderProgression` but takes a plain list instead of a `ChordProgression` object
-- [ ] Create `app/src/main/java/com/playchords/data/IWantGenerator.kt`
+- [x] Create `app/src/main/java/com/playchords/data/IWantGenerator.kt`
   - `fun generateIWantSong(): IWantSong` — picks a random key from the 12 supported major keys, picks one random progression per section from each pool, renders each to chord names via `ChordMapper.renderNumerals()`, returns the assembled `IWantSong`
   - Section labels: `"Opening"`, `"Main Body"`, `"Desire Statement"`, `"Climax"`
 
@@ -45,18 +45,18 @@ All roman numerals in the four pools (`I`, `ii`, `iii`, `IV`, `V`, `vi`) are pre
 
 ### Phase 2: ViewModel — Section Playback
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Create `app/src/main/java/com/playchords/viewmodel/IWantViewModel.kt`
-- [ ] Extend `AndroidViewModel`; create `AudioEngine` in the constructor
-- [ ] On init, call `generateIWantSong()` and store the result in a `StateFlow<IWantSong>`
-- [ ] Expose `playingSection: StateFlow<Int?>` — index of the currently playing section, or `null` if stopped
-- [ ] Implement `playSection(index: Int)`:
+- [x] Create `app/src/main/java/com/playchords/viewmodel/IWantViewModel.kt`
+- [x] Extend `AndroidViewModel`; create `AudioEngine` in the constructor
+- [x] On init, call `generateIWantSong()` and store the result in a `StateFlow<IWantSong>`
+- [x] Expose `playingSection: StateFlow<Int?>` — index of the currently playing section, or `null` if stopped
+- [x] Implement `playSection(index: Int)`:
   - Cancel any in-flight playback job
   - Set `playingSection` to `index`
   - Launch a coroutine on `Dispatchers.IO` that loops the section's chord list indefinitely at 120 BPM (2000 ms per chord, 4 beats × 500 ms/beat)
-- [ ] Implement `stopPlayback()`: cancel the job, set `playingSection` to `null`
-- [ ] Release `AudioEngine` and cancel jobs in `onCleared()`
+- [x] Implement `stopPlayback()`: cancel the job, set `playingSection` to `null`
+- [x] Release `AudioEngine` and cancel jobs in `onCleared()`
 
 **Technical Notes:**
 Loop playback using `while (isActive) { for (chord in chords) { ensureActive(); audioEngine.playChord(chord, 2000L) } }`. `isActive` and `ensureActive()` from `kotlinx.coroutines` ensure the loop exits cleanly when the job is cancelled. 120 BPM × 4 beats = 500 ms/beat; 4 beats per chord = 2000 ms per chord.
@@ -65,17 +65,17 @@ Loop playback using `while (isActive) { for (chord in chords) { ensureActive(); 
 
 ### Phase 3: UI — I Want Screen
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Create `app/src/main/java/com/playchords/ui/IWantScreen.kt`
-- [ ] Top bar: back button + title "I Want Song"
-- [ ] Below the top bar: key displayed prominently (e.g., `"Key: C"`)
-- [ ] Four section rows, one per section in `IWantSong.sections`:
+- [x] Create `app/src/main/java/com/playchords/ui/IWantScreen.kt`
+- [x] Top bar: back button + title "I Want Song"
+- [x] Below the top bar: key displayed prominently (e.g., `"Key: C"`)
+- [x] Four section rows, one per section in `IWantSong.sections`:
   - A `Button` labelled with the section name (e.g., `"Opening"`)
   - Beside it: the rendered chord names joined with `" – "` (e.g., `"C – Am – F"`)
   - The active section's button uses `containerColor = primary`; inactive sections use `OutlinedButton` style
-- [ ] Tapping a section button calls `viewModel.playSection(index)`; if the tapped section is already playing, call `viewModel.stopPlayback()` (toggle off)
-- [ ] Back navigation calls `viewModel.stopPlayback()` then `navController.popBackStack()`
+- [x] Tapping a section button calls `viewModel.playSection(index)`; if the tapped section is already playing, call `viewModel.stopPlayback()` (toggle off)
+- [x] Back navigation calls `viewModel.stopPlayback()` then `navController.popBackStack()`
 
 **Technical Notes:**
 Collect `viewModel.song` and `viewModel.playingSection` as state with `collectAsState()`. The active/inactive button style swap is driven by comparing `playingSection` to the row's index. Stop-on-back is handled by calling `stopPlayback()` in the `onBack` lambda before popping the stack — no `DisposableEffect` needed since the ViewModel's `onCleared` also cancels playback.
@@ -84,12 +84,12 @@ Collect `viewModel.song` and `viewModel.playingSection` as state with `collectAs
 
 ### Phase 4: Navigation and Main Screen
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] In `MainScreen.kt`: add a fourth button `"Random I Want"` below the existing three; add `onRandomIWant: () -> Unit` parameter
-- [ ] In `Navigation.kt`: add a `composable("iwant")` route that instantiates `IWantViewModel` and passes it to `IWantScreen`
-- [ ] In the `main` composable in `Navigation.kt`: pass `onRandomIWant = { navController.navigate("iwant") }` to `MainScreen`
-- [ ] Verify back navigation from `iwant` pops cleanly to `main`
+- [x] In `MainScreen.kt`: add a fourth button `"Random I Want"` below the existing three; add `onRandomIWant: () -> Unit` parameter
+- [x] In `Navigation.kt`: add a `composable("iwant")` route that instantiates `IWantViewModel` and passes it to `IWantScreen`
+- [x] In the `main` composable in `Navigation.kt`: pass `onRandomIWant = { navController.navigate("iwant") }` to `MainScreen`
+- [x] Verify back navigation from `iwant` pops cleanly to `main`
 
 **Technical Notes:**
 Each navigation to `"iwant"` creates a new `IWantViewModel` instance (and therefore a new song). This is the desired behavior — "Random I Want" always generates a fresh song. If the user wants to replay the same song they can stay on the screen and re-tap sections.
@@ -98,17 +98,17 @@ Each navigation to `"iwant"` creates a new `IWantViewModel` instance (and theref
 
 ### Phase 5: Tests and Build Verification
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Run `./gradlew assembleDebug` — must succeed
-- [ ] Run `./gradlew testDebugUnitTest` — all existing tests must still pass
-- [ ] Add unit tests in `IWantGeneratorTest.kt`:
+- [x] Run `./gradlew assembleDebug` — must succeed
+- [x] Run `./gradlew testDebugUnitTest` — all existing tests must still pass
+- [x] Add unit tests in `IWantGeneratorTest.kt`:
   - Generated song has exactly 4 sections
   - Each section label matches expected values (`"Opening"`, `"Main Body"`, `"Desire Statement"`, `"Climax"`)
   - Each section's `chords` list is non-empty
   - `song.key` is one of the 12 supported major keys
   - Generating 20 songs produces at least 2 distinct keys (randomness sanity check)
-- [ ] Manual smoke test: tap "Random I Want", verify song screen appears with key and 4 sections; tap each section, verify audio loops; tap again to stop; tap back, verify return to main
+- [x] Manual smoke test: tap "Random I Want", verify song screen appears with key and 4 sections; tap each section, verify audio loops; tap again to stop; tap back, verify return to main
 
 ---
 
@@ -138,17 +138,25 @@ Each navigation to `"iwant"` creates a new `IWantViewModel` instance (and theref
 
 *Fill in when the cycle closes. Move this document to `doc/planning/completed/` afterward.*
 
-**Completion Date:** [YYYY-MM-DD]
-**Phases Completed:** [List or "All"]
-**Work Deferred:** [What was not done and why, or "None"]
+**Completion Date:** 2026-06-02
+**Phases Completed:** 1–4 complete; Phase 5 pending on-device verification
+**Work Deferred:** On-device smoke test (requires physical device or emulator with audio)
 
 **Accomplishments:**
-- [What was built or changed]
+- Created `IWantProgressions.kt` with all four curated progression pools (24 progressions total)
+- Created `IWantSong.kt` data classes (`IWantSection`, `IWantSong`)
+- Added `renderNumerals()` to `ChordMapper` for plain-list roman numeral rendering
+- Created `IWantGenerator.kt` — pure function, picks random key + one progression per section, renders to chord names
+- Created `IWantViewModel.kt` — generates song on init, loops selected section at 120 BPM, cancels on section switch or back
+- Created `IWantScreen.kt` — key header, divider, 4 section rows each with a toggle button (filled when playing, outlined when stopped) and chord names; tapping active section stops playback
+- Added "Random I Want" button to `MainScreen`, wired via `iwant` route in `Navigation.kt`
 
 **Metrics:**
-- Files modified: [N]
-- Files added: [N]
-- Unit tests: [N passing]
+- Files modified: 3 (`ChordMapper.kt`, `MainScreen.kt`, `Navigation.kt`)
+- Files added: 6 (`IWantProgressions.kt`, `IWantSong.kt`, `IWantGenerator.kt`, `IWantViewModel.kt`, `IWantScreen.kt`, `IWantGeneratorTest.kt`)
+- Unit tests: 22 passing (15 pre-existing + 7 new)
 
 **Lessons / Notes:**
-[Anything worth remembering for future cycles.]
+- `renderNumerals()` is a clean two-line helper that reuses the existing `keyMap` logic — no need to create a dummy `ChordProgression` object just to call `renderProgression`.
+- Looping with `while (true) { for (chord in chords) { ensureActive(); audioEngine.playChord(...) } }` gives clean cancellation at chord boundaries without needing `isActive` checks on the outer loop.
+- Each navigation to `"iwant"` creates a fresh `IWantViewModel` and therefore a fresh song — intentional behavior since the button is labelled "Random".

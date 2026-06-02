@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -16,8 +18,14 @@ import com.playchords.ui.theme.MutedText
 fun MainScreen(
     onSelectProgression: () -> Unit,
     onRandomProgression: () -> Unit,
-    onPlayChords: () -> Unit
+    onPlayChords: () -> Unit,
+    onRandomIWant: () -> Unit
 ) {
+    val context = LocalContext.current
+    val versionName = remember {
+        context.packageManager.getPackageInfo(context.packageName, 0).versionName
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -41,6 +49,13 @@ fun MainScreen(
                 text = "Chord progressions for practice and exploration",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MutedText,
+                textAlign = TextAlign.Center
+            )
+
+            Text(
+                text = "v$versionName",
+                style = MaterialTheme.typography.labelSmall,
+                color = MutedText.copy(alpha = 0.5f),
                 textAlign = TextAlign.Center
             )
 
@@ -84,6 +99,20 @@ fun MainScreen(
             ) {
                 Text(
                     text = "Play Chords",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            OutlinedButton(
+                onClick = onRandomIWant,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Text(
+                    text = "Random I Want",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary
