@@ -103,10 +103,8 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Resolution 1",             "Song / Section",         listOf("ii", "V", "I", "I"),               SECTION_RESOLUTION, ENDS_ON_I),
     prog("Resolution 2",             "Song / Section",         listOf("IV", "V", "I", "I"),               SECTION_RESOLUTION, ENDS_ON_I),
     prog("Resolution 3",             "Song / Section",         listOf("vi", "IV", "V", "I"),              SECTION_RESOLUTION, ENDS_ON_I),
-    prog("Resolution 4",             "Song / Section",         listOf("IV", "I", "I", "I"),               SECTION_RESOLUTION, ENDS_ON_I),
     prog("Resolution 5",             "Song / Section",         listOf("V", "V", "I", "I"),                SECTION_RESOLUTION, ENDS_ON_I),
     prog("Resolution 6",             "Song / Section",         listOf("I", "vi", "V", "I"),               SECTION_RESOLUTION, ENDS_ON_I),
-    prog("Resolution 7",             "Song / Section",         listOf("I", "V", "I", "I"),                SECTION_RESOLUTION, ENDS_ON_I),
     prog("Resolution 8",             "Song / Section",         listOf("iii", "vi", "V", "I"),             SECTION_RESOLUTION, ENDS_ON_I),
 )
 
