@@ -1,6 +1,6 @@
 # DevCycle 2026-012: Progression Uniqueness and Summary Display
 
-**Status:** Planning
+**Status:** Work Complete
 **Start Date:** 2026-06-03
 **Target Completion:** 2026-06-03
 **Focus:** Enforce distinct progression picks within I Want and I Love songs, and display progression names and Roman numerals on all song screens.
@@ -23,16 +23,16 @@ Two song types currently allow the same progression to appear in multiple sectio
 
 ### Phase 1: I Want Song — Progression Uniqueness
 
-**Status:** Planning
+**Status:** Work Complete
 
 The Opening section has no uniqueness constraint. The three constrained sections are picked in order: Main Body first, then Desire Statement (must differ from Main Body), then Climax (must differ from both).
 
-- [ ] Rewrite `IWantGenerator.generate()` to pick sections sequentially with exclusions:
+- [x] Rewrite `IWantGenerator.generate()` to pick sections sequentially with exclusions:
   - Opening: pick freely from `IWANT_OPENING` pool (no constraint)
   - Main Body: pick freely from `IWANT_MAIN` pool
   - Desire Statement: pick from `IWANT_DESIRE` pool excluding Main Body numerals
   - Climax: pick from `IWANT_CLIMAX` pool excluding Main Body and Desire Statement numerals
-- [ ] Use the existing `progressionsByTagExcluding` helper for the constrained picks
+- [x] Use the existing `progressionsByTagExcluding` helper for the constrained picks
 
 **Technical Notes:**
 
@@ -55,11 +55,11 @@ Each pool is large enough that exclusions will not produce empty lists in practi
 
 ### Phase 2: I Love Song — Progression Uniqueness
 
-**Status:** Planning
+**Status:** Work Complete
 
 All four I Love sections must be distinct. Sections are picked in order; each new pick excludes all previously picked numerals.
 
-- [ ] Rewrite `ILoveGenerator.generate()` to pick sections sequentially with exclusions:
+- [x] Rewrite `ILoveGenerator.generate()` to pick sections sequentially with exclusions:
   - Opening: pick freely from `ILOVE_OPENING` pool
   - Main Love Theme: pick from `ILOVE_MAIN_LOVE_THEME` pool excluding Opening
   - Variant Love Theme: pick from `ILOVE_VARIANT_LOVE_THEME` pool excluding Opening and Main Love Theme
@@ -82,31 +82,32 @@ val climaxNumerals   = progressionsByTagExcluding(ILOVE_CLIMAX, openingNumerals,
 
 ### Phase 3: Progression Summary Display
 
-**Status:** Planning
+**Status:** Work Complete
 
 All three song screens must show each section's progression name and Roman numerals in a compact list below the Key heading and above the Regenerate button. The section models currently store `romanNumerals` but not the progression `name`, so the name must be added to each section model and populated in each generator.
 
 **Model changes — add `progressionName: String` to each section type:**
 
-- [ ] Add `progressionName: String` to `IWantSection` (`IWantSong.kt`)
-- [ ] Add `progressionName: String` to `ILoveSection` (`ILoveSong.kt`)
-- [ ] Add `progressionName: String` to `ComedySection` (`ComedySong.kt`)
+- [x] Add `progressionName: String` to `IWantSection` (`IWantSong.kt`)
+- [x] Add `progressionName: String` to `ILoveSection` (`ILoveSong.kt`)
+- [x] Add `progressionName: String` to `ComedySection` (`ComedySong.kt`)
 
 **Generator changes — pick full `ChordProgression` objects instead of bare numeral lists:**
 
-- [ ] Add a `progressionsByTagFull(tag)` helper to `ChordProgressions.kt` that returns `List<ChordProgression>` (filters by tag and excludes `LONG_CHORD`, same as `progressionsByTag` but returns the full object)
-- [ ] Add a `progressionsByTagExcludingFull(tag, vararg excluded)` helper for constrained picks that also returns `List<ChordProgression>`
-- [ ] Update `IWantGenerator` to pick `ChordProgression` objects and populate `progressionName` from `progression.name`
-- [ ] Update `ILoveGenerator` to pick `ChordProgression` objects and populate `progressionName`
-- [ ] Update `ComedyGenerator` to pick `ChordProgression` objects and populate `progressionName`
+- [x] Add a `progressionsByTagFull(tag)` helper to `ChordProgressions.kt` that returns `List<ChordProgression>`
+- [x] Add a `progressionsByTagExcludingFull(tag, vararg excluded)` helper for constrained picks that also returns `List<ChordProgression>`
+- [x] Add `progressionsWithoutTagFull` and `progressionsExcludingFull` helpers for Comedy's chorus/verse picking
+- [x] Update `IWantGenerator` to pick `ChordProgression` objects and populate `progressionName` from `progression.name`
+- [x] Update `ILoveGenerator` to pick `ChordProgression` objects and populate `progressionName`
+- [x] Update `ComedyGenerator` to pick `ChordProgression` objects and populate `progressionName`
 
 **UI changes — add progression summary block to each screen:**
 
 The summary block sits between the Key `Text` and the Regenerate `OutlinedButton` in each screen's `Column`. It lists one row per section: `"[Section Label]: [Progression Name] — [Roman Numerals]"` in muted text at `bodySmall` size.
 
-- [ ] Add progression summary block to `IWantScreen.kt` (between Key heading and Regenerate button; currently there is a `HorizontalDivider` there — keep the divider, insert the list above the button)
-- [ ] Add progression summary block to `ILoveScreen.kt` (between Key heading and Regenerate button)
-- [ ] Add progression summary block to `ComedyScreen.kt` (between Key heading and Regenerate button)
+- [x] Add progression summary block to `IWantScreen.kt` (between Key heading and first divider)
+- [x] Add progression summary block to `ILoveScreen.kt` (between Key heading and Regenerate button)
+- [x] Add progression summary block to `ComedyScreen.kt` (between Key heading and Regenerate button)
 
 **Technical Notes:**
 
@@ -130,10 +131,10 @@ For the Comedy screen, the Modulated Chorus and its Chorus Resolution repeat pro
 
 ### Phase 4: Build and Verify
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Run `./gradlew assembleDebug` — must be BUILD SUCCESSFUL
-- [ ] Run `./gradlew testDebugUnitTest` — all tests must pass
+- [x] Run `./gradlew assembleDebug` — BUILD SUCCESSFUL
+- [x] Run `./gradlew testDebugUnitTest` — all tests pass
 - [ ] Manual smoke test: generate each song type several times; confirm no duplicate progressions appear in constrained sections
 - [ ] Manual smoke test: confirm the progression summary list appears correctly on all three screens
 
@@ -162,12 +163,18 @@ For the Comedy screen, the Modulated Chorus and its Chorus Resolution repeat pro
 
 *Fill in when the cycle closes. Move this document to `doc/planning/completed/` afterward.*
 
-**Completion Date:**
-**Phases Completed:**
-**Work Deferred:**
+**Completion Date:** 2026-06-03
+**Phases Completed:** All
+**Work Deferred:** Manual device/emulator smoke tests (require device)
 
 **Accomplishments:**
+- I Want Song: Desire Statement and Climax now guaranteed distinct from each other and from Main Body
+- I Love Song: all four sections now guaranteed distinct from each other
+- Added `progressionsByTagFull`, `progressionsByTagExcludingFull`, `progressionsWithoutTagFull`, `progressionsExcludingFull` helpers to `ChordProgressions.kt`
+- Added `progressionName` field to `IWantSection`, `ILoveSection`, and `ComedySection`
+- All three generators updated to pick full `ChordProgression` objects and populate the name
+- All three song screens now display a progression summary list (name + Roman numerals per section) between the Key heading and the Regenerate button
 
 **Metrics:**
-- Files modified:
-- Tests passing:
+- Files modified: 10 (`IWantSong.kt`, `ILoveSong.kt`, `ComedySong.kt`, `ChordProgressions.kt`, `IWantGenerator.kt`, `ILoveGenerator.kt`, `ComedyGenerator.kt`, `IWantScreen.kt`, `ILoveScreen.kt`, `ComedyScreen.kt`)
+- Tests passing: all (`assembleDebug` + `testDebugUnitTest` both BUILD SUCCESSFUL)

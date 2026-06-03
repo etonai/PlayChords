@@ -146,6 +146,22 @@ fun progressionsByTagExcluding(tag: ProgressionTag, vararg excluded: List<String
         .filter { tag in it.tags && LONG_CHORD !in it.tags && it.romanNumerals !in excluded }
         .map { it.romanNumerals }
 
+fun progressionsByTagFull(tag: ProgressionTag): List<ChordProgression> =
+    allProgressions
+        .filter { tag in it.tags && LONG_CHORD !in it.tags }
+
+fun progressionsByTagExcludingFull(tag: ProgressionTag, vararg excluded: List<String>): List<ChordProgression> =
+    allProgressions
+        .filter { tag in it.tags && LONG_CHORD !in it.tags && it.romanNumerals !in excluded }
+
+fun progressionsWithoutTagFull(tag: ProgressionTag): List<ChordProgression> =
+    allProgressions
+        .filter { tag !in it.tags && LONG_CHORD !in it.tags }
+
+fun progressionsExcludingFull(excluded: List<String>): List<ChordProgression> =
+    allProgressions
+        .filter { LONG_CHORD !in it.tags && it.romanNumerals != excluded }
+
 val majorKeys = listOf("C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B")
 
 val tempoOptions = listOf(50, 60, 70, 80, 90, 100, 110, 120)

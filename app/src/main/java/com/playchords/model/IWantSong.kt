@@ -2,6 +2,7 @@ package com.playchords.model
 
 data class IWantSection(
     val label: String,
+    val progressionName: String,
     val romanNumerals: List<String>,
     val chords: List<String>
 )

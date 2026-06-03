@@ -1,7 +1,9 @@
 package com.playchords.data
 
+import com.playchords.model.ChordProgression
 import com.playchords.model.IWantSection
 import com.playchords.model.IWantSong
+import com.playchords.model.ProgressionTag
 import com.playchords.model.ProgressionTag.*
 
 object IWantGenerator {
@@ -10,23 +12,28 @@ object IWantGenerator {
 
     fun generate(): IWantSong {
         val key = keys.random()
+
+        val opening = progressionsByTagFull(IWANT_OPENING).random()
+        val main = progressionsByTagFull(IWANT_MAIN).random()
+        val desire = progressionsByTagExcludingFull(IWANT_DESIRE, main.romanNumerals).random()
+        val climax = progressionsByTagExcludingFull(IWANT_CLIMAX, main.romanNumerals, desire.romanNumerals).random()
+
         return IWantSong(
             key = key,
             sections = listOf(
-                buildSection("Opening", progressionsByTag(IWANT_OPENING), key),
-                buildSection("Main Body", progressionsByTag(IWANT_MAIN), key),
-                buildSection("Desire Statement", progressionsByTag(IWANT_DESIRE), key),
-                buildSection("Climax", progressionsByTag(IWANT_CLIMAX), key)
+                buildSection("Opening", opening, key),
+                buildSection("Main Body", main, key),
+                buildSection("Desire Statement", desire, key),
+                buildSection("Climax", climax, key)
             )
         )
     }
 
-    private fun buildSection(label: String, pool: List<List<String>>, key: String): IWantSection {
-        val numerals = pool.random()
-        return IWantSection(
+    private fun buildSection(label: String, progression: ChordProgression, key: String): IWantSection =
+        IWantSection(
             label = label,
-            romanNumerals = numerals,
-            chords = ChordMapper.renderNumerals(key, numerals)
+            progressionName = progression.name,
+            romanNumerals = progression.romanNumerals,
+            chords = ChordMapper.renderNumerals(key, progression.romanNumerals)
         )
-    }
 }

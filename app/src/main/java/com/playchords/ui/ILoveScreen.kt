@@ -58,6 +58,16 @@ fun ILoveScreen(
                 color = MaterialTheme.colorScheme.primary
             )
 
+            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                song.sections.forEach { section ->
+                    Text(
+                        text = "${section.label}: ${section.progressionName} — ${section.romanNumerals.joinToString(" ")}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MutedText
+                    )
+                }
+            }
+
             OutlinedButton(
                 onClick = { viewModel.regenerate() },
                 modifier = Modifier

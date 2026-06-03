@@ -1,5 +1,6 @@
 package com.playchords.data
 
+import com.playchords.model.ChordProgression
 import com.playchords.model.ComedySection
 import com.playchords.model.ComedySong
 import com.playchords.model.ProgressionTag.*
@@ -12,59 +13,40 @@ object ComedyGenerator {
         val key = keys.random()
         val modulatedKey = ChordMapper.keyOneWholeStepHigher(key)!!
 
-        val chorusNumerals = progressionsWithoutTag(ENDS_ON_I).random()
-        val verseNumerals = progressionsExcluding(chorusNumerals).random()
-        val bridgeNumerals = progressionsByTagExcluding(ENDS_ON_V, chorusNumerals, verseNumerals).random()
-        val chorusResolutionNumerals = progressionsByTag(ENDS_ON_I).random()
-        val verseResolutionNumerals = progressionsByTag(ENDS_ON_I).random()
+        val chorus = progressionsWithoutTagFull(ENDS_ON_I).random()
+        val verse = progressionsExcludingFull(chorus.romanNumerals).random()
+        val bridge = progressionsByTagExcludingFull(ENDS_ON_V, chorus.romanNumerals, verse.romanNumerals).random()
+        val chorusResolution = progressionsByTagFull(ENDS_ON_I).random()
+        val verseResolution = progressionsByTagFull(ENDS_ON_I).random()
 
         return ComedySong(
             key = key,
             modulatedKey = modulatedKey,
             sections = listOf(
-                ComedySection(
-                    label = "Chorus",
-                    romanNumerals = chorusNumerals,
-                    chords = ChordMapper.renderNumerals(key, chorusNumerals)
-                ),
-                ComedySection(
-                    label = "Chorus Resolution",
-                    romanNumerals = chorusResolutionNumerals,
-                    chords = ChordMapper.renderNumerals(key, chorusResolutionNumerals),
-                    isOptional = true
-                ),
-                ComedySection(
-                    label = "Verse",
-                    romanNumerals = verseNumerals,
-                    chords = ChordMapper.renderNumerals(key, verseNumerals)
-                ),
-                ComedySection(
-                    label = "Verse Resolution",
-                    romanNumerals = verseResolutionNumerals,
-                    chords = ChordMapper.renderNumerals(key, verseResolutionNumerals),
-                    isOptional = true
-                ),
-                ComedySection(
-                    label = "Bridge",
-                    romanNumerals = bridgeNumerals,
-                    chords = ChordMapper.renderNumerals(key, bridgeNumerals),
-                    isOptional = true
-                ),
-                ComedySection(
-                    label = "Modulated Chorus",
-                    romanNumerals = chorusNumerals,
-                    chords = ChordMapper.renderNumerals(modulatedKey, chorusNumerals),
-                    isModulated = true,
-                    isOptional = true
-                ),
-                ComedySection(
-                    label = "Chorus Resolution",
-                    romanNumerals = chorusResolutionNumerals,
-                    chords = ChordMapper.renderNumerals(modulatedKey, chorusResolutionNumerals),
-                    isModulated = true,
-                    isOptional = true
-                )
+                buildSection("Chorus", chorus, key),
+                buildSection("Chorus Resolution", chorusResolution, key, isOptional = true),
+                buildSection("Verse", verse, key),
+                buildSection("Verse Resolution", verseResolution, key, isOptional = true),
+                buildSection("Bridge", bridge, key, isOptional = true),
+                buildSection("Modulated Chorus", chorus, modulatedKey, isModulated = true, isOptional = true),
+                buildSection("Chorus Resolution", chorusResolution, modulatedKey, isModulated = true, isOptional = true)
             )
         )
     }
+
+    private fun buildSection(
+        label: String,
+        progression: ChordProgression,
+        key: String,
+        isModulated: Boolean = false,
+        isOptional: Boolean = false
+    ): ComedySection =
+        ComedySection(
+            label = label,
+            progressionName = progression.name,
+            romanNumerals = progression.romanNumerals,
+            chords = ChordMapper.renderNumerals(key, progression.romanNumerals),
+            isModulated = isModulated,
+            isOptional = isOptional
+        )
 }
