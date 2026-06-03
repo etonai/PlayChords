@@ -22,7 +22,7 @@ class ComedyGeneratorTest {
         assertEquals("Verse Resolution", sections[3].label)
         assertEquals("Bridge", sections[4].label)
         assertEquals("Modulated Chorus", sections[5].label)
-        assertEquals("Modulated Chorus Resolution", sections[6].label)
+        assertEquals("Chorus Resolution", sections[6].label)
     }
 
     @Test
@@ -46,7 +46,7 @@ class ComedyGeneratorTest {
         assertTrue(sections[3].isOptional)  // Verse Resolution
         assertTrue(sections[4].isOptional)  // Bridge
         assertTrue(sections[5].isOptional)  // Modulated Chorus
-        assertTrue(sections[6].isOptional)  // Modulated Chorus Resolution
+        assertTrue(sections[6].isOptional)  // Chorus Resolution (modulated)
     }
 
     @Test

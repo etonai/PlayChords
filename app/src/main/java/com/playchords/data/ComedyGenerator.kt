@@ -12,11 +12,11 @@ object ComedyGenerator {
         val key = keys.random()
         val modulatedKey = ChordMapper.keyOneWholeStepHigher(key)!!
 
-        val chorusNumerals = progressionsByTag(COMEDY_CHORUS).random()
-        val verseNumerals = progressionsByTag(COMEDY_VERSE).random()
-        val bridgeNumerals = progressionsByTag(COMEDY_BRIDGE).random()
-        val chorusResolutionNumerals = progressionsByTag(SECTION_RESOLUTION).random()
-        val verseResolutionNumerals = progressionsByTag(SECTION_RESOLUTION).random()
+        val chorusNumerals = progressionsWithoutTag(ENDS_ON_I).random()
+        val verseNumerals = progressionsExcluding(chorusNumerals).random()
+        val bridgeNumerals = progressionsByTagExcluding(ENDS_ON_V, chorusNumerals, verseNumerals).random()
+        val chorusResolutionNumerals = progressionsByTag(ENDS_ON_I).random()
+        val verseResolutionNumerals = progressionsByTag(ENDS_ON_I).random()
 
         return ComedySong(
             key = key,
@@ -58,7 +58,7 @@ object ComedyGenerator {
                     isOptional = true
                 ),
                 ComedySection(
-                    label = "Modulated Chorus Resolution",
+                    label = "Chorus Resolution",
                     romanNumerals = chorusResolutionNumerals,
                     chords = ChordMapper.renderNumerals(modulatedKey, chorusResolutionNumerals),
                     isModulated = true,
