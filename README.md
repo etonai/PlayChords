@@ -79,6 +79,10 @@ app/src/main/assets/notes/
 
 Piano samples: Salamander Grand Piano by Alexander Holm, licensed CC-BY 3.0. See `CREDITS.md`.
 
+## License
+
+MIT License. Copyright (c) 2026 Edward T. Tonai. See `LICENSE` for the full text.
+
 ## Development
 
 See `doc/planning/DevelopmentProcess.md` for the planning and dev cycle workflow.
