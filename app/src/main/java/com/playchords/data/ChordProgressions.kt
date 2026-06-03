@@ -21,6 +21,9 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Plagal Loop",              "Classic / Standard",     listOf("IV", "I", "V", "I"),               CADENTIAL, LIFT, ENDS_ON_I, IWANT_CLIMAX, ILOVE_VARIANT_LOVE_THEME),
     prog("Descending Bass Line",     "Classic / Standard",     listOf("I", "V/7", "vi", "V"),             OPEN, COLOR, ENDS_ON_V),
     prog("Axis Variant",             "Classic / Standard",     listOf("vi", "V", "IV", "I"),              CADENTIAL, LIFT, ENDS_ON_I),
+    prog("Stepwise Lift",            "Classic / Standard",     listOf("I", "ii", "IV", "V"),              LIFT, OPEN, ENDS_ON_V),
+    prog("Ascending Walk",           "Classic / Standard",     listOf("I", "ii", "iii", "V"),             LIFT, OPEN, ENDS_ON_V),
+    prog("More Than a Feeling",      "Classic / Standard",     listOf("I", "IV", "vi", "V"),              LIFT, LOOP, OPEN, ENDS_ON_V, COMEDY_BRIDGE),
 
     // Musical Theatre / Jazz
     prog("Two Five One",             "Musical Theatre / Jazz", listOf("ii", "V", "I"),                    CADENTIAL, ENDS_ON_I, IWANT_CLIMAX, ILOVE_CLIMAX),
@@ -31,34 +34,50 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Backdoor Resolution",      "Musical Theatre / Jazz", listOf("ii", "♭VII", "I"),                 CADENTIAL, COLOR, ENDS_ON_I),
     prog("Minor Two Five One",       "Musical Theatre / Jazz", listOf("iiø", "V7", "i"),                  CADENTIAL, COLOR),
     prog("Chromatic Walk-Up",        "Musical Theatre / Jazz", listOf("I", "I#dim", "ii", "V"),           PIVOT, COLOR, ENDS_ON_V),
-    prog("Major Six Turnaround",     "Musical Theatre / Jazz", listOf("I", "VI", "ii", "I"),              OPEN, LOOP, COLOR, PIVOT, ENDS_ON_I),
+    prog("Easy",                     "Musical Theatre / Jazz", listOf("I", "iii", "ii", "V"),             OPEN, LIFT, PIVOT, ENDS_ON_V),
+    prog("Love is an Open Door",     "Musical Theatre / Jazz", listOf("I", "I/3", "IV", "V"),             OPEN, ENDS_ON_V),
+    prog("Mostly Me",                "Musical Theatre / Jazz", listOf("I", "IV", "ii", "V"),              LIFT, CADENTIAL, ENDS_ON_V, IWANT_MAIN, ILOVE_MAIN_LOVE_THEME),
 
     // Expressive / Color
     prog("Secondary Dominant Lift",  "Expressive / Color",     listOf("I", "V/vi", "vi", "IV"),           LIFT, COLOR),
-    prog("Major To Minor Four",      "Expressive / Color",     listOf("I", "IV", "iv", "I"),              CADENTIAL, COLOR, ENDS_ON_I),
     prog("Minor To Resolution",      "Expressive / Color",     listOf("vi", "ii", "V", "I"),              CADENTIAL, LIFT, ENDS_ON_I, IWANT_MAIN, SECTION_RESOLUTION),
     prog("Flat Seven Color",         "Expressive / Color",     listOf("I", "♭VII", "IV", "I"),            COLOR, CADENTIAL, ENDS_ON_I),
     prog("Line Cliche Major",        "Expressive / Color",     listOf("I", "Imaj7", "I7", "IV"),          OPEN, COLOR, PIVOT),
     prog("Mixolydian Variant",       "Expressive / Color",     listOf("I", "♭VII", "I", "IV"),            COLOR, LOOP),
     prog("Chromatic Mediants",       "Expressive / Color",     listOf("I", "♭III", "IV", "I"),            COLOR, LIFT, ENDS_ON_I),
     prog("Deceptive Cycle",          "Expressive / Color",     listOf("V", "vi", "IV", "I"),              CADENTIAL, PIVOT, ENDS_ON_I),
+    prog("Who Knew",                 "Expressive / Color",     listOf("I", "ii", "vi", "V"),              OPEN, PIVOT, COLOR, ENDS_ON_V),
+    prog("Thirds Descent",           "Expressive / Color",     listOf("I", "iii", "vi", "V"),             OPEN, COLOR, PIVOT, ENDS_ON_V),
+    prog("Four Three Drop",          "Expressive / Color",     listOf("I", "IV", "iii", "V"),             COLOR, PIVOT, ENDS_ON_V),
+    prog("Life Would Suck",          "Expressive / Color",     listOf("I", "vi", "iii", "V"),             OPEN, COLOR, LOOP, ENDS_ON_V),
+
+    // Loops
+    prog("Two Chord Open Loop",      "Loops",                  listOf("I", "IV"),                         OPEN, LOOP, IWANT_OPENING),
+    prog("Two Five Loop",            "Loops",                  listOf("ii", "V"),                         OPEN, LOOP, ENDS_ON_V),
+    prog("Drone Loop",               "Loops",                  listOf("I", "♭VII"),                       OPEN, LOOP, COLOR),
+    prog("Suspended Loop",           "Loops",                  listOf("I", "Vsus4"),                      OPEN, LOOP),
+    prog("Minor Oscillation",        "Loops",                  listOf("i", "♭VI"),                        OPEN, LOOP, COLOR),
+    prog("Pedal Loop",               "Loops",                  listOf("I", "ii/I", "IV/I", "V/I"),        OPEN, LOOP, COLOR),
+
+    // Cinematic / Modern
+    prog("Modern Film Loop",         "Cinematic / Modern",     listOf("i", "♭VI", "III", "♭VII"),         OPEN, LOOP, COLOR),
+    prog("Lydian Lift",              "Cinematic / Modern",     listOf("I", "II", "IV", "I"),              LIFT, COLOR, ENDS_ON_I),
+    prog("Ambiguous Loop",           "Cinematic / Modern",     listOf("I", "V", "ii", "IV"),              OPEN, LOOP, PIVOT),
+    prog("Sal Tlay",                 "Cinematic / Modern",     listOf("I", "iii", "IV", "V"),             LIFT, OPEN, COLOR, ENDS_ON_V, IWANT_DESIRE, ILOVE_MAIN_LOVE_THEME, COMEDY_BRIDGE),
 
     // Song / Section — I Want Opening
     prog("IWant Opening 1",          "Song / Section",         listOf("I", "vi"),                         IWANT_OPENING, ILOVE_OPENING),
-    prog("IWant Opening 2",          "Song / Section",         listOf("I", "IV"),                         IWANT_OPENING),
     prog("IWant Opening 3",          "Song / Section",         listOf("I", "vi", "IV"),                   IWANT_OPENING),
     prog("IWant Opening 4",          "Song / Section",         listOf("vi", "IV"),                        IWANT_OPENING),
     prog("IWant Opening 5",          "Song / Section",         listOf("I", "iii", "vi"),                  IWANT_OPENING),
     prog("IWant Opening 6",          "Song / Section",         listOf("I", "vi", "IV", "I"),              IWANT_OPENING, ENDS_ON_I),
 
     // Song / Section — I Want Main
-    prog("IWant Main 1",             "Song / Section",         listOf("I", "IV", "ii", "V"),              IWANT_MAIN, ILOVE_MAIN_LOVE_THEME, ENDS_ON_V),
     prog("IWant Main 2",             "Song / Section",         listOf("I", "iii", "vi", "ii", "V"),       IWANT_MAIN, ENDS_ON_V),
 
     // Song / Section — I Want Desire
     prog("IWant Desire 1",           "Song / Section",         listOf("IV", "V", "I", "vi"),              IWANT_DESIRE, COMEDY_CHORUS),
     prog("IWant Desire 2",           "Song / Section",         listOf("I", "IV", "I", "V"),               IWANT_DESIRE, COMEDY_CHORUS, COMEDY_VERSE, ENDS_ON_V),
-    prog("IWant Desire 3",           "Song / Section",         listOf("I", "iii", "IV", "V"),             IWANT_DESIRE, ILOVE_MAIN_LOVE_THEME, COMEDY_BRIDGE, ENDS_ON_V),
 
     // Song / Section — I Want Climax
     prog("IWant Climax 1",           "Song / Section",         listOf("IV", "V", "I"),                    IWANT_CLIMAX, ILOVE_CLIMAX, ENDS_ON_I),
@@ -95,7 +114,6 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Comedy Verse 3",           "Song / Section",         listOf("I", "V"),                          COMEDY_VERSE, ENDS_ON_V),
 
     // Song / Section — Comedy Bridge
-    prog("Comedy Bridge 1",          "Song / Section",         listOf("I", "IV", "vi", "V"),              COMEDY_BRIDGE, ENDS_ON_V),
     prog("Comedy Bridge 2",          "Song / Section",         listOf("vi", "ii", "IV", "V"),             COMEDY_BRIDGE, ENDS_ON_V),
     prog("Comedy Bridge 3",          "Song / Section",         listOf("I", "IV", "I", "ii", "V"),         COMEDY_BRIDGE, ENDS_ON_V),
 

@@ -7,4 +7,6 @@ Some bugs I found while testing on 0602
 - Minor 2 5 1, I don't like it, deprecate it
 - Do not let a chord resolution start with the I - that is kinda boring
 - Do not let progressions get repeated in Love Song and I want Song
-- 
+
+
+
