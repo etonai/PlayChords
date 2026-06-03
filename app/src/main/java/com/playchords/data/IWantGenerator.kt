@@ -18,6 +18,8 @@ object IWantGenerator {
         val desire = progressionsByTagExcludingFull(IWANT_DESIRE, main.romanNumerals).random()
         val climax = progressionsByTagExcludingFull(IWANT_CLIMAX, main.romanNumerals, desire.romanNumerals).random()
 
+        val rhymeWord = RhymeWords.rhymeWords.random()
+
         return IWantSong(
             key = key,
             sections = listOf(
@@ -25,7 +27,8 @@ object IWantGenerator {
                 buildSection("Main Body", main, key),
                 buildSection("Desire Statement", desire, key),
                 buildSection("Climax", climax, key)
-            )
+            ),
+            rhymeWord = rhymeWord
         )
     }
 

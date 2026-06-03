@@ -10,5 +10,6 @@ data class ILoveSection(
 
 data class ILoveSong(
     val key: String,
-    val sections: List<ILoveSection>
+    val sections: List<ILoveSection>,
+    val rhymeWord: String
 )

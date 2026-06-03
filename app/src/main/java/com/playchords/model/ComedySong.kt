@@ -12,5 +12,6 @@ data class ComedySection(
 data class ComedySong(
     val key: String,
     val modulatedKey: String,
-    val sections: List<ComedySection>
+    val sections: List<ComedySection>,
+    val rhymeWord: String
 )

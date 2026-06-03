@@ -18,6 +18,8 @@ object ILoveGenerator {
         val variant = progressionsByTagExcludingFull(ILOVE_VARIANT_LOVE_THEME, opening.romanNumerals, main.romanNumerals).random()
         val climax = progressionsByTagExcludingFull(ILOVE_CLIMAX, opening.romanNumerals, main.romanNumerals, variant.romanNumerals).random()
 
+        val rhymeWord = RhymeWords.rhymeWords.random()
+
         return ILoveSong(
             key = key,
             sections = listOf(
@@ -25,7 +27,8 @@ object ILoveGenerator {
                 buildSection("Main Love Theme", main, key),
                 buildSection("Variant Love Theme", variant, key, isOptional = true),
                 buildSection("Climax", climax, key)
-            )
+            ),
+            rhymeWord = rhymeWord
         )
     }
 

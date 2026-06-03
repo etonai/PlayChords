@@ -19,6 +19,8 @@ object ComedyGenerator {
         val chorusResolution = progressionsByTagFull(ENDS_ON_I).random()
         val verseResolution = progressionsByTagFull(ENDS_ON_I).random()
 
+        val rhymeWord = RhymeWords.rhymeWords.random()
+
         return ComedySong(
             key = key,
             modulatedKey = modulatedKey,
@@ -30,7 +32,8 @@ object ComedyGenerator {
                 buildSection("Bridge", bridge, key, isOptional = true),
                 buildSection("Modulated Chorus", chorus, modulatedKey, isModulated = true, isOptional = true),
                 buildSection("Chorus Resolution", chorusResolution, modulatedKey, isModulated = true, isOptional = true)
-            )
+            ),
+            rhymeWord = rhymeWord
         )
     }
 
