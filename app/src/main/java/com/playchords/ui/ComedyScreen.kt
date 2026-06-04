@@ -1,6 +1,5 @@
 package com.playchords.ui
 
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -11,43 +10,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.playchords.ui.theme.MutedText
 import com.playchords.viewmodel.ComedyViewModel
-
-private fun Modifier.verticalScrollbar(
-    state: ScrollState,
-    trackColor: Color = Color.Gray.copy(alpha = 0.2f),
-    thumbColor: Color = Color.Gray.copy(alpha = 0.6f),
-    width: Dp = 4.dp
-): Modifier = this.drawWithContent {
-    drawContent()
-    if (state.maxValue > 0) {
-        val thumbWidth = width.toPx()
-        val viewportHeight = size.height
-        val contentHeight = viewportHeight + state.maxValue
-        val thumbHeight = (viewportHeight * viewportHeight / contentHeight).coerceAtLeast(40f)
-        val thumbTop = (viewportHeight - thumbHeight) * state.value / state.maxValue
-        drawRect(
-            color = trackColor,
-            topLeft = Offset(size.width - thumbWidth, 0f),
-            size = Size(thumbWidth, viewportHeight)
-        )
-        drawRect(
-            color = thumbColor,
-            topLeft = Offset(size.width - thumbWidth, thumbTop),
-            size = Size(thumbWidth, thumbHeight)
-        )
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,7 +52,6 @@ fun ComedyScreen(
                 .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
                 .padding(horizontal = 24.dp, vertical = 16.dp)
-                .verticalScrollbar(scrollState)
                 .verticalScroll(scrollState),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
