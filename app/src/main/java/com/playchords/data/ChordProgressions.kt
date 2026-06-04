@@ -57,11 +57,13 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Four Three Drop",          "Expressive / Color",     listOf("I", "IV", "iii", "V"),             COLOR, PIVOT, ENDS_ON_V),
     prog("Life Would Suck",          "Expressive / Color",     listOf("I", "vi", "iii", "V"),             OPEN, COLOR, ENDS_ON_V),
     prog("Creep",                    "Expressive / Color",     listOf("I", "III", "IV", "iv"),            OPEN, COLOR),
+    prog("You'll Be Back",           "Expressive / Color",     listOf("I", "I/bVII", "IV", "ii7"),        OPEN, COLOR),
+    prog("She Use To Be Mine Bridge","Expressive / Color",     listOf("I", "III7/vi", "vi", "IV"),        OPEN, COLOR),
 
 
     // Cinematic / Modern
     prog("Lydian Lift",              "Cinematic / Modern",     listOf("I", "II", "IV", "I"),              LIFT, COLOR, ENDS_ON_I),
-    prog("Swiftie 2nd",             "Cinematic / Modern",     listOf("I", "V", "ii", "IV"),              OPEN, PIVOT),
+    prog("Swiftie 2nd",              "Cinematic / Modern",     listOf("I", "V", "ii", "IV"),              OPEN, PIVOT),
     prog("Sal Tlay",                 "Cinematic / Modern",     listOf("I", "iii", "IV", "V"),             LIFT, OPEN, COLOR, ENDS_ON_V, IWANT_DESIRE, ILOVE_MAIN_LOVE_THEME, COMEDY_BRIDGE),
 
     // Song / Section — I Want Opening

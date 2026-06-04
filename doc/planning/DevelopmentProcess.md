@@ -80,6 +80,18 @@ DevCycle documents and individual phases use these status values:
 
 `Verified` is a permission-gated status. Agents may not set a DevCycle or phase to `Verified` without explicit user permission.
 
+## Implementation Authority
+
+Agents are not allowed to begin implementing a phase without explicit user permission.
+
+When a phase is in **Planning** status:
+
+- agents may create or update the DevCycle document
+- agents may not edit source files, run builds, or take any other implementation action
+- agents must stop after the planning document is updated and wait for the user to say to proceed
+
+A phase moves to **In Progress** only when the user explicitly instructs the agent to implement it.
+
 ## Verification Authority
 
 Agents are not allowed to mark a DevCycle or phase as `Verified` without explicit user permission.
