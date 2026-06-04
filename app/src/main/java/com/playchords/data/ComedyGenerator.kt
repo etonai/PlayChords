@@ -16,8 +16,8 @@ object ComedyGenerator {
         val chorus = progressionsWithoutTagFull(ENDS_ON_I).random()
         val verse = progressionsExcludingFull(chorus.romanNumerals).random()
         val bridge = progressionsByTagExcludingFull(ENDS_ON_V, chorus.romanNumerals, verse.romanNumerals).random()
-        val chorusResolution = progressionsByTagFull(ENDS_ON_I).random()
-        val verseResolution = progressionsByTagFull(ENDS_ON_I).random()
+        val chorusResolution = progressionsByTagExcludingFull(ENDS_ON_I, chorus.romanNumerals, verse.romanNumerals, bridge.romanNumerals).random()
+        val verseResolution = progressionsByTagExcludingFull(ENDS_ON_I, chorus.romanNumerals, verse.romanNumerals, bridge.romanNumerals, chorusResolution.romanNumerals).random()
 
         val preModulation = progressionsExcludingManyFull(
             chorus.romanNumerals, verse.romanNumerals, bridge.romanNumerals,
