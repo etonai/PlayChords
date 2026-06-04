@@ -6,7 +6,7 @@ This app also serves as a test bed for ideas around generating chord progression
 
 ## Features
 
-- **70 chord progressions** across five categories: Classic/Standard, Musical Theatre/Jazz, Expressive/Color, Cinematic/Modern, and Song/Section
+- **73 chord progressions** across five categories: Classic/Standard, Musical Theatre/Jazz, Expressive/Color, Cinematic/Modern, and Song/Section
 - **12 major keys**
 - **Tempos** from 50 to 120 BPM, played twice through
 - **Sampled piano audio** via `SoundPool` — four Salamander Grand Piano samples cover all 12 semitones through pitch shifting (Salamander Grand Piano by Alexander Holm, CC-BY 3.0)

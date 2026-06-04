@@ -27,6 +27,7 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Coldplay Progression",     "Classic / Standard",     listOf("IV", "I", "V"),                    OPEN, LIFT, ENDS_ON_V),
     prog("Swiftie 5th",              "Classic / Standard",     listOf("IV", "I", "V", "vi"),              OPEN, LIFT),
     prog("Swiftie 4th",              "Classic / Standard",     listOf("vi", "IV", "I", "V"),              OPEN, LIFT, ENDS_ON_V),
+    prog("Rock Backslide",           "Classic / Standard",     listOf("I", "V", "IV"),                    OPEN, LIFT),
 
     // Musical Theatre / Jazz
     prog("Two Five One",             "Musical Theatre / Jazz", listOf("ii", "V", "I"),                    CADENTIAL, ENDS_ON_I, IWANT_CLIMAX, ILOVE_CLIMAX),
@@ -55,6 +56,7 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Thirds Descent",           "Expressive / Color",     listOf("I", "iii", "vi", "V"),             OPEN, COLOR, PIVOT, ENDS_ON_V),
     prog("Four Three Drop",          "Expressive / Color",     listOf("I", "IV", "iii", "V"),             COLOR, PIVOT, ENDS_ON_V),
     prog("Life Would Suck",          "Expressive / Color",     listOf("I", "vi", "iii", "V"),             OPEN, COLOR, ENDS_ON_V),
+    prog("Creep",                    "Expressive / Color",     listOf("I", "III", "IV", "iv"),            OPEN, COLOR),
 
 
     // Cinematic / Modern
