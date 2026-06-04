@@ -15,15 +15,15 @@ val allProgressions: List<ChordProgression> = listOf(
 
     // Classic / Standard
     prog("Classic Cadence",          "Classic / Standard",     listOf("I", "IV", "V", "I"),              CADENTIAL, ENDS_ON_I, IWANT_MAIN, ILOVE_MAIN_LOVE_THEME, ILOVE_VARIANT_LOVE_THEME, ILOVE_CLIMAX, COMEDY_CHORUS),
-    prog("Pop Axis",                 "Classic / Standard",     listOf("I", "V", "vi", "IV"),              LIFT, LOOP, IWANT_DESIRE, COMEDY_CHORUS),
-    prog("Minor Pop Loop",           "Classic / Standard",     listOf("vi", "IV", "I", "V"),              OPEN, LIFT, LOOP, ENDS_ON_V, IWANT_DESIRE, COMEDY_CHORUS, COMEDY_BRIDGE),
-    prog("50s Progression",          "Classic / Standard",     listOf("I", "vi", "IV", "V"),              LIFT, LOOP, ENDS_ON_V, IWANT_MAIN, IWANT_DESIRE, COMEDY_CHORUS, COMEDY_VERSE),
+    prog("Pop Axis",                 "Classic / Standard",     listOf("I", "V", "vi", "IV"),              LIFT, IWANT_DESIRE, COMEDY_CHORUS),
+    prog("Minor Pop Loop",           "Classic / Standard",     listOf("vi", "IV", "I", "V"),              OPEN, LIFT, ENDS_ON_V, IWANT_DESIRE, COMEDY_CHORUS, COMEDY_BRIDGE),
+    prog("50s Progression",          "Classic / Standard",     listOf("I", "vi", "IV", "V"),              LIFT, ENDS_ON_V, IWANT_MAIN, IWANT_DESIRE, COMEDY_CHORUS, COMEDY_VERSE),
     prog("Plagal Loop",              "Classic / Standard",     listOf("IV", "I", "V", "I"),               CADENTIAL, LIFT, ENDS_ON_I, IWANT_CLIMAX, ILOVE_VARIANT_LOVE_THEME),
     prog("Descending Bass Line",     "Classic / Standard",     listOf("I", "V/7", "vi", "V"),             OPEN, COLOR, ENDS_ON_V),
     prog("Axis Variant",             "Classic / Standard",     listOf("vi", "V", "IV", "I"),              CADENTIAL, LIFT, ENDS_ON_I),
     prog("Stepwise Lift",            "Classic / Standard",     listOf("I", "ii", "IV", "V"),              LIFT, OPEN, ENDS_ON_V),
     prog("Ascending Walk",           "Classic / Standard",     listOf("I", "ii", "iii", "V"),             LIFT, OPEN, ENDS_ON_V),
-    prog("More Than a Feeling",      "Classic / Standard",     listOf("I", "IV", "vi", "V"),              LIFT, LOOP, OPEN, ENDS_ON_V, COMEDY_BRIDGE),
+    prog("More Than a Feeling",      "Classic / Standard",     listOf("I", "IV", "vi", "V"),              LIFT, OPEN, ENDS_ON_V, COMEDY_BRIDGE),
 
     // Musical Theatre / Jazz
     prog("Two Five One",             "Musical Theatre / Jazz", listOf("ii", "V", "I"),                    CADENTIAL, ENDS_ON_I, IWANT_CLIMAX, ILOVE_CLIMAX),
@@ -37,38 +37,30 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Easy",                     "Musical Theatre / Jazz", listOf("I", "iii", "ii", "V"),             OPEN, LIFT, PIVOT, ENDS_ON_V),
     prog("Love is an Open Door",     "Musical Theatre / Jazz", listOf("I", "I/3", "IV", "V"),             OPEN, ENDS_ON_V),
     prog("Mostly Me",                "Musical Theatre / Jazz", listOf("I", "IV", "ii", "V"),              LIFT, CADENTIAL, ENDS_ON_V, IWANT_MAIN, ILOVE_MAIN_LOVE_THEME),
+    prog("Don't Cry Out Loud",       "Musical Theatre / Jazz", listOf("I", "iii7", "ii7", "ii7/V"),        OPEN, COLOR, PIVOT, ENDS_ON_V),
+    prog("Don't Cry Build",          "Musical Theatre / Jazz", listOf("vi", "iii", "vi", "II7", "V7"),     OPEN, COLOR, PIVOT, ENDS_ON_V),
 
     // Expressive / Color
     prog("Secondary Dominant Lift",  "Expressive / Color",     listOf("I", "V/vi", "vi", "IV"),           LIFT, COLOR),
     prog("Minor To Resolution",      "Expressive / Color",     listOf("vi", "ii", "V", "I"),              CADENTIAL, LIFT, ENDS_ON_I, IWANT_MAIN, SECTION_RESOLUTION),
     prog("Flat Seven Color",         "Expressive / Color",     listOf("I", "♭VII", "IV", "I"),            COLOR, CADENTIAL, ENDS_ON_I),
     prog("Line Cliche Major",        "Expressive / Color",     listOf("I", "Imaj7", "I7", "IV"),          OPEN, COLOR, PIVOT),
-    prog("Mixolydian Variant",       "Expressive / Color",     listOf("I", "♭VII", "I", "IV"),            COLOR, LOOP),
+    prog("Mixolydian Variant",       "Expressive / Color",     listOf("I", "♭VII", "I", "IV"),            COLOR),
     prog("Chromatic Mediants",       "Expressive / Color",     listOf("I", "♭III", "IV", "I"),            COLOR, LIFT, ENDS_ON_I),
     prog("Deceptive Cycle",          "Expressive / Color",     listOf("V", "vi", "IV", "I"),              CADENTIAL, PIVOT, ENDS_ON_I),
     prog("Who Knew",                 "Expressive / Color",     listOf("I", "ii", "vi", "V"),              OPEN, PIVOT, COLOR, ENDS_ON_V),
     prog("Thirds Descent",           "Expressive / Color",     listOf("I", "iii", "vi", "V"),             OPEN, COLOR, PIVOT, ENDS_ON_V),
     prog("Four Three Drop",          "Expressive / Color",     listOf("I", "IV", "iii", "V"),             COLOR, PIVOT, ENDS_ON_V),
-    prog("Life Would Suck",          "Expressive / Color",     listOf("I", "vi", "iii", "V"),             OPEN, COLOR, LOOP, ENDS_ON_V),
+    prog("Life Would Suck",          "Expressive / Color",     listOf("I", "vi", "iii", "V"),             OPEN, COLOR, ENDS_ON_V),
 
-    // Loops
-    prog("Two Chord Open Loop",      "Loops",                  listOf("I", "IV"),                         OPEN, LOOP, IWANT_OPENING),
-    prog("Two Five Loop",            "Loops",                  listOf("ii", "V"),                         OPEN, LOOP, ENDS_ON_V),
-    prog("Drone Loop",               "Loops",                  listOf("I", "♭VII"),                       OPEN, LOOP, COLOR),
-    prog("Suspended Loop",           "Loops",                  listOf("I", "Vsus4"),                      OPEN, LOOP),
-    prog("Minor Oscillation",        "Loops",                  listOf("i", "♭VI"),                        OPEN, LOOP, COLOR),
-    prog("Pedal Loop",               "Loops",                  listOf("I", "ii/I", "IV/I", "V/I"),        OPEN, LOOP, COLOR),
 
     // Cinematic / Modern
-    prog("Modern Film Loop",         "Cinematic / Modern",     listOf("i", "♭VI", "III", "♭VII"),         OPEN, LOOP, COLOR),
     prog("Lydian Lift",              "Cinematic / Modern",     listOf("I", "II", "IV", "I"),              LIFT, COLOR, ENDS_ON_I),
-    prog("Ambiguous Loop",           "Cinematic / Modern",     listOf("I", "V", "ii", "IV"),              OPEN, LOOP, PIVOT),
+    prog("Ambiguous Loop",           "Cinematic / Modern",     listOf("I", "V", "ii", "IV"),              OPEN, PIVOT),
     prog("Sal Tlay",                 "Cinematic / Modern",     listOf("I", "iii", "IV", "V"),             LIFT, OPEN, COLOR, ENDS_ON_V, IWANT_DESIRE, ILOVE_MAIN_LOVE_THEME, COMEDY_BRIDGE),
 
     // Song / Section — I Want Opening
-    prog("IWant Opening 1",          "Song / Section",         listOf("I", "vi"),                         IWANT_OPENING, ILOVE_OPENING),
     prog("IWant Opening 3",          "Song / Section",         listOf("I", "vi", "IV"),                   IWANT_OPENING),
-    prog("IWant Opening 4",          "Song / Section",         listOf("vi", "IV"),                        IWANT_OPENING),
     prog("IWant Opening 5",          "Song / Section",         listOf("I", "iii", "vi"),                  IWANT_OPENING),
     prog("IWant Opening 6",          "Song / Section",         listOf("I", "vi", "IV", "I"),              IWANT_OPENING, ENDS_ON_I),
 
@@ -110,8 +102,6 @@ val allProgressions: List<ChordProgression> = listOf(
 
     // Song / Section — Comedy Verse
     prog("Comedy Verse 1",           "Song / Section",         listOf("I", "IV", "V"),                    COMEDY_VERSE, ENDS_ON_V),
-    prog("Comedy Verse 2",           "Song / Section",         listOf("I", "IV"),                         COMEDY_VERSE),
-    prog("Comedy Verse 3",           "Song / Section",         listOf("I", "V"),                          COMEDY_VERSE, ENDS_ON_V),
 
     // Song / Section — Comedy Bridge
     prog("Comedy Bridge 2",          "Song / Section",         listOf("vi", "ii", "IV", "V"),             COMEDY_BRIDGE, ENDS_ON_V),
@@ -161,6 +151,10 @@ fun progressionsWithoutTagFull(tag: ProgressionTag): List<ChordProgression> =
 fun progressionsExcludingFull(excluded: List<String>): List<ChordProgression> =
     allProgressions
         .filter { LONG_CHORD !in it.tags && it.romanNumerals != excluded }
+
+fun progressionsExcludingManyFull(vararg excluded: List<String>): List<ChordProgression> =
+    allProgressions
+        .filter { LONG_CHORD !in it.tags && it.romanNumerals !in excluded }
 
 val majorKeys = listOf("C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B")
 

@@ -59,37 +59,11 @@ fun ILoveScreen(
                 color = MaterialTheme.colorScheme.primary
             )
 
-            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                song.sections.forEach { section ->
-                    Text(
-                        text = "${section.label}: ${section.progressionName} — ${section.romanNumerals.joinToString(" ")}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MutedText
-                    )
-                }
-            }
-
             Text(
                 text = "Random Word: ${song.rhymeWord}",
                 style = MaterialTheme.typography.bodySmall.copy(fontStyle = FontStyle.Italic),
                 color = MutedText
             )
-
-            OutlinedButton(
-                onClick = { viewModel.regenerate() },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-            ) {
-                Text(
-                    text = "Regenerate",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-
-            HorizontalDivider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
 
             song.sections.forEachIndexed { index, section ->
                 val isPlaying = playingSection == index
@@ -151,6 +125,41 @@ fun ILoveScreen(
                         style = MaterialTheme.typography.bodyLarge,
                         color = if (isPlaying) MaterialTheme.colorScheme.primary else MutedText,
                         fontWeight = if (isPlaying) FontWeight.SemiBold else FontWeight.Normal
+                    )
+                }
+            }
+
+            HorizontalDivider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
+
+            OutlinedButton(
+                onClick = { viewModel.regenerate() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+            ) {
+                Text(
+                    text = "Regenerate",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            HorizontalDivider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
+
+            Text(
+                text = "Progression Information",
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = MutedText
+            )
+
+            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                song.sections.forEach { section ->
+                    Text(
+                        text = "${section.label}: ${section.progressionName} — ${section.romanNumerals.joinToString(" ")}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MutedText
                     )
                 }
             }

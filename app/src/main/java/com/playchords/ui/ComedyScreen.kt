@@ -8,7 +8,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -96,37 +95,11 @@ fun ComedyScreen(
                 color = MaterialTheme.colorScheme.primary
             )
 
-            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                song.sections.forEach { section ->
-                    Text(
-                        text = "${section.label}: ${section.progressionName} — ${section.romanNumerals.joinToString(" ")}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MutedText
-                    )
-                }
-            }
-
             Text(
                 text = "Random Word: ${song.rhymeWord}",
                 style = MaterialTheme.typography.bodySmall.copy(fontStyle = FontStyle.Italic),
                 color = MutedText
             )
-
-            OutlinedButton(
-                onClick = { viewModel.regenerate() },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-            ) {
-                Text(
-                    text = "Regenerate",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-
-            HorizontalDivider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
 
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) { song.sections.forEachIndexed { index, section ->
                 val isPlaying = playingSection == index
@@ -142,21 +115,12 @@ fun ComedyScreen(
                                 .width(160.dp)
                                 .height(52.dp)
                         ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = section.label,
-                                    fontSize = 13.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    maxLines = 1
-                                )
-                                if (section.isOptional) {
-                                    Text(
-                                        text = "(optional)",
-                                        fontSize = 10.sp,
-                                        color = LocalContentColor.current.copy(alpha = 0.7f)
-                                    )
-                                }
-                            }
+                            Text(
+                                text = section.label,
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold,
+                                maxLines = 1
+                            )
                         }
                     } else {
                         OutlinedButton(
@@ -165,22 +129,13 @@ fun ComedyScreen(
                                 .width(160.dp)
                                 .height(52.dp)
                         ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = section.label,
-                                    fontSize = 13.sp,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = MaterialTheme.colorScheme.primary,
-                                    maxLines = 1
-                                )
-                                if (section.isOptional) {
-                                    Text(
-                                        text = "(optional)",
-                                        fontSize = 10.sp,
-                                        color = MutedText
-                                    )
-                                }
-                            }
+                            Text(
+                                text = section.label,
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = MaterialTheme.colorScheme.primary,
+                                maxLines = 1
+                            )
                         }
                     }
 
@@ -201,6 +156,41 @@ fun ComedyScreen(
                     }
                 }
             } }
+
+            HorizontalDivider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
+
+            OutlinedButton(
+                onClick = { viewModel.regenerate() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+            ) {
+                Text(
+                    text = "Regenerate",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            HorizontalDivider(color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
+
+            Text(
+                text = "Progression Information",
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = MutedText
+            )
+
+            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                song.sections.forEach { section ->
+                    Text(
+                        text = "${section.label}: ${section.progressionName} — ${section.romanNumerals.joinToString(" ")}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MutedText
+                    )
+                }
+            }
         }
     }
 }

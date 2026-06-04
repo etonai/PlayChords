@@ -29,6 +29,6 @@ object RhymeWords {
         "share", "wear", "yay", "scare", "rest", "ed", "cool", "rule",
         "earn", "meow", "now", "how", "stop", "top", "fee", "wealth",
         "health", "guy", "born", "shorn", "eye", "kid", "did", "war",
-        "hour", "here", "dear", "brain", "spine", "voice", "choice"
+        "hour", "here", "dear", "brain", "spine", "voice", "choice", "orange", "tangerine"
     )
 }
