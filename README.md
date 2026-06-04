@@ -6,7 +6,7 @@ This app also serves as a test bed for ideas around generating chord progression
 
 ## Features
 
-- **82 chord progressions** across six categories: Classic/Standard, Musical Theatre/Jazz, Expressive/Color, Loops, Cinematic/Modern, and Song/Section
+- **70 chord progressions** across five categories: Classic/Standard, Musical Theatre/Jazz, Expressive/Color, Cinematic/Modern, and Song/Section
 - **12 major keys**
 - **Tempos** from 50 to 120 BPM, played twice through
 - **Sampled piano audio** via `SoundPool` — four Salamander Grand Piano samples cover all 12 semitones through pitch shifting (Salamander Grand Piano by Alexander Holm, CC-BY 3.0)
@@ -19,14 +19,14 @@ This app also serves as a test bed for ideas around generating chord progression
 ## Screens
 
 1. **Main** — six entry points: Select Progression, Random Progression, Play Chords, Random I Want, Random I Love, Random Comedy Song; app version shown at top
-2. **Select Progression** — scrollable list grouped by category, with tags (CADENTIAL, LIFT, LOOP, OPEN, PIVOT, COLOR) shown for each progression
+2. **Select Progression** — scrollable list grouped by category, with tags (CADENTIAL, LIFT, OPEN, PIVOT, COLOR) shown for each progression
 3. **Select Key** — grid of the 12 major keys
 4. **Select Tempo** — picker for 8 BPM options (50–120)
 5. **Playback** — shows the current chord large, with progression name, key, BPM, and a scrolling chord bar; Play Again and Back to Main when done
 6. **Play Chords** — 12 root-note sections, each with major, minor, diminished, dominant 7, and major 7 buttons; tap to play, tap another to switch
 7. **I Want Song** — key at top, progression summary list, Regenerate button, then four section rows (Opening, Main Body, Desire Statement, Climax); each row shows the chord names in the selected key; tap a section to loop it at 120 BPM, tap again to stop
 8. **I Love Song** — same layout as I Want Song with four sections: Opening, Main Love Theme, Variant Love Theme (optional), and Climax
-9. **Comedy Song** — scrollable screen with key at top, progression summary list, Regenerate button, then seven section rows; Chorus Resolution, Verse Resolution, Bridge, Modulated Chorus, and the modulated Chorus Resolution are marked optional; the Modulated Chorus and its resolution are played in a key one whole step higher
+9. **Comedy Song** — scrollable screen with key at top, progression summary list, Regenerate button, then eight section rows; Chorus Resolution, Verse Resolution, Bridge, Pre-Modulation, Modulated Chorus, and the modulated Chorus Resolution are optional; the Modulated Chorus and its resolution are played in a key one whole step higher
 
 ## Song Structures
 
@@ -63,6 +63,7 @@ The comedy song structure is built for maximum harmonic contrast between section
 | Verse | Different progression from Chorus |
 | Verse Resolution | Optional cadential tag after the verse |
 | Bridge | Ends on V — sets up the modulation |
+| Pre-Modulation | Optional transition before the key change |
 | Modulated Chorus | Chorus progression played a whole step higher |
 | Chorus Resolution | Resolution in the modulated key (optional) |
 

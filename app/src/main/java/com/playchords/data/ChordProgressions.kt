@@ -14,7 +14,7 @@ private fun prog(
 val allProgressions: List<ChordProgression> = listOf(
 
     // Classic / Standard
-    prog("Classic Cadence",          "Classic / Standard",     listOf("I", "IV", "V", "I"),              CADENTIAL, ENDS_ON_I, IWANT_MAIN, ILOVE_MAIN_LOVE_THEME, ILOVE_VARIANT_LOVE_THEME, ILOVE_CLIMAX, COMEDY_CHORUS),
+    prog("Classic Cadence",          "Classic / Standard",     listOf("I", "IV", "V", "I"),               CADENTIAL, ENDS_ON_I, IWANT_MAIN, ILOVE_MAIN_LOVE_THEME, ILOVE_VARIANT_LOVE_THEME, ILOVE_CLIMAX, COMEDY_CHORUS),
     prog("Pop Axis",                 "Classic / Standard",     listOf("I", "V", "vi", "IV"),              LIFT, IWANT_DESIRE, COMEDY_CHORUS),
     prog("Minor Pop Loop",           "Classic / Standard",     listOf("vi", "IV", "I", "V"),              OPEN, LIFT, ENDS_ON_V, IWANT_DESIRE, COMEDY_CHORUS, COMEDY_BRIDGE),
     prog("50s Progression",          "Classic / Standard",     listOf("I", "vi", "IV", "V"),              LIFT, ENDS_ON_V, IWANT_MAIN, IWANT_DESIRE, COMEDY_CHORUS, COMEDY_VERSE),
@@ -24,6 +24,9 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Stepwise Lift",            "Classic / Standard",     listOf("I", "ii", "IV", "V"),              LIFT, OPEN, ENDS_ON_V),
     prog("Ascending Walk",           "Classic / Standard",     listOf("I", "ii", "iii", "V"),             LIFT, OPEN, ENDS_ON_V),
     prog("More Than a Feeling",      "Classic / Standard",     listOf("I", "IV", "vi", "V"),              LIFT, OPEN, ENDS_ON_V, COMEDY_BRIDGE),
+    prog("Coldplay Progression",     "Classic / Standard",     listOf("IV", "I", "V"),                    OPEN, LIFT, ENDS_ON_V),
+    prog("Swiftie 5th",              "Classic / Standard",     listOf("IV", "I", "V", "vi"),              OPEN, LIFT),
+    prog("Swiftie 4th",              "Classic / Standard",     listOf("vi", "IV", "I", "V"),              OPEN, LIFT, ENDS_ON_V),
 
     // Musical Theatre / Jazz
     prog("Two Five One",             "Musical Theatre / Jazz", listOf("ii", "V", "I"),                    CADENTIAL, ENDS_ON_I, IWANT_CLIMAX, ILOVE_CLIMAX),
@@ -56,7 +59,7 @@ val allProgressions: List<ChordProgression> = listOf(
 
     // Cinematic / Modern
     prog("Lydian Lift",              "Cinematic / Modern",     listOf("I", "II", "IV", "I"),              LIFT, COLOR, ENDS_ON_I),
-    prog("Ambiguous Loop",           "Cinematic / Modern",     listOf("I", "V", "ii", "IV"),              OPEN, PIVOT),
+    prog("Swiftie 2nd",             "Cinematic / Modern",     listOf("I", "V", "ii", "IV"),              OPEN, PIVOT),
     prog("Sal Tlay",                 "Cinematic / Modern",     listOf("I", "iii", "IV", "V"),             LIFT, OPEN, COLOR, ENDS_ON_V, IWANT_DESIRE, ILOVE_MAIN_LOVE_THEME, COMEDY_BRIDGE),
 
     // Song / Section — I Want Opening
@@ -75,7 +78,6 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("IWant Climax 1",           "Song / Section",         listOf("IV", "V", "I"),                    IWANT_CLIMAX, ILOVE_CLIMAX, ENDS_ON_I),
     prog("IWant Climax 2",           "Song / Section",         listOf("IV", "V", "vi", "V", "I"),         IWANT_CLIMAX, ENDS_ON_I),
     prog("IWant Climax 3",           "Song / Section",         listOf("ii", "IV", "V", "I"),              IWANT_CLIMAX, SECTION_RESOLUTION, ENDS_ON_I),
-    prog("IWant Climax 4",           "Song / Section",         listOf("IV", "V", "I", "vi", "IV", "V", "I"), IWANT_CLIMAX, LONG_CHORD, ENDS_ON_I),
 
     // Song / Section — I Love Opening
     prog("ILove Opening 1",          "Song / Section",         listOf("I", "IV", "I"),                    ILOVE_OPENING, ENDS_ON_I),
@@ -108,10 +110,7 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Comedy Bridge 3",          "Song / Section",         listOf("I", "IV", "I", "ii", "V"),         COMEDY_BRIDGE, ENDS_ON_V),
 
     // Song / Section — Section Resolution
-    prog("Resolution 1",             "Song / Section",         listOf("ii", "V", "I", "I"),               SECTION_RESOLUTION, ENDS_ON_I),
-    prog("Resolution 2",             "Song / Section",         listOf("IV", "V", "I", "I"),               SECTION_RESOLUTION, ENDS_ON_I),
     prog("Resolution 3",             "Song / Section",         listOf("vi", "IV", "V", "I"),              SECTION_RESOLUTION, ENDS_ON_I),
-    prog("Resolution 5",             "Song / Section",         listOf("V", "V", "I", "I"),                SECTION_RESOLUTION, ENDS_ON_I),
     prog("Resolution 6",             "Song / Section",         listOf("I", "vi", "V", "I"),               SECTION_RESOLUTION, ENDS_ON_I),
     prog("Resolution 8",             "Song / Section",         listOf("iii", "vi", "V", "I"),             SECTION_RESOLUTION, ENDS_ON_I),
 )
