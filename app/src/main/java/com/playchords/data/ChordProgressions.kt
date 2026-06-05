@@ -27,7 +27,9 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Coldplay Progression",     "Classic / Standard",     listOf("IV", "I", "V"),                    OPEN, LIFT, ENDS_ON_V),
     prog("Swiftie 5th",              "Classic / Standard",     listOf("IV", "I", "V", "vi"),              OPEN, LIFT),
     prog("Swiftie 4th",              "Classic / Standard",     listOf("vi", "IV", "I", "V"),              OPEN, LIFT, ENDS_ON_V),
-    prog("Rock Backslide",           "Classic / Standard",     listOf("I", "V", "IV"),                    OPEN, LIFT),
+    prog("Yellow",                   "Classic / Standard",     listOf("I", "V", "IV"),                    OPEN, LIFT),
+    prog("Odo shinko",               "Classic / Standard",     listOf("IV", "V", "iii", "vi"),            OPEN, LIFT),
+    prog("Pachelbel Canon",          "Classic / Standard",     listOf("I", "V", "vi", "iii", "IV", "I", "IV", "V"),  LONG_CHORD, OPEN, LIFT, ENDS_ON_V),
 
     // Musical Theatre / Jazz
     prog("Two Five One",             "Musical Theatre / Jazz", listOf("ii", "V", "I"),                    CADENTIAL, ENDS_ON_I, IWANT_CLIMAX, ILOVE_CLIMAX),
@@ -49,6 +51,7 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Minor To Resolution",      "Expressive / Color",     listOf("vi", "ii", "V", "I"),              CADENTIAL, LIFT, ENDS_ON_I, IWANT_MAIN, SECTION_RESOLUTION),
     prog("Flat Seven Color",         "Expressive / Color",     listOf("I", "♭VII", "IV", "I"),            COLOR, CADENTIAL, ENDS_ON_I),
     prog("Line Cliche Major",        "Expressive / Color",     listOf("I", "Imaj7", "I7", "IV"),          OPEN, COLOR, PIVOT),
+    prog("Something Plus",           "Expressive / Color",     listOf("I", "Imaj7", "I7", "IV", "iv", "I"),  LONG_CHORD, CADENTIAL, COLOR, ENDS_ON_I),
     prog("Mixolydian Variant",       "Expressive / Color",     listOf("I", "♭VII", "I", "IV"),            COLOR),
     prog("Chromatic Mediants",       "Expressive / Color",     listOf("I", "♭III", "IV", "I"),            COLOR, LIFT, ENDS_ON_I),
     prog("Deceptive Cycle",          "Expressive / Color",     listOf("V", "vi", "IV", "I"),              CADENTIAL, PIVOT, ENDS_ON_I),
@@ -59,6 +62,7 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("Creep",                    "Expressive / Color",     listOf("I", "III", "IV", "iv"),            OPEN, COLOR),
     prog("You'll Be Back",           "Expressive / Color",     listOf("I", "I/bVII", "IV", "ii7"),        OPEN, COLOR),
     prog("She Use To Be Mine Bridge","Expressive / Color",     listOf("I", "III7/vi", "vi", "IV"),        OPEN, COLOR),
+    prog("Sam's Progression",        "Expressive / Color",     listOf("I", "iii", "vi", "ivadd6"),        OPEN, COLOR),
 
 
     // Cinematic / Modern
@@ -80,18 +84,16 @@ val allProgressions: List<ChordProgression> = listOf(
 
     // Song / Section — I Want Climax
     prog("IWant Climax 1",           "Song / Section",         listOf("IV", "V", "I"),                    IWANT_CLIMAX, ILOVE_CLIMAX, ENDS_ON_I),
-    prog("IWant Climax 2",           "Song / Section",         listOf("IV", "V", "vi", "V", "I"),         IWANT_CLIMAX, ENDS_ON_I),
+    prog("IWant Climax 2",           "Song / Section",         listOf("IV", "V", "vi", "V"),              IWANT_CLIMAX),
     prog("IWant Climax 3",           "Song / Section",         listOf("ii", "IV", "V", "I"),              IWANT_CLIMAX, SECTION_RESOLUTION, ENDS_ON_I),
 
     // Song / Section — I Love Opening
-    prog("ILove Opening 1",          "Song / Section",         listOf("I", "IV", "I"),                    ILOVE_OPENING, ENDS_ON_I),
     prog("ILove Opening 2",          "Song / Section",         listOf("I", "Imaj7", "IV"),                ILOVE_OPENING),
     prog("ILove Opening 3",          "Song / Section",         listOf("vi", "I", "IV"),                   ILOVE_OPENING),
     prog("ILove Opening 4",          "Song / Section",         listOf("I", "iii", "IV"),                  ILOVE_OPENING),
     prog("ILove Opening 5",          "Song / Section",         listOf("I", "IV", "vi", "I"),              ILOVE_OPENING, ENDS_ON_I),
 
     // Song / Section — I Love Main Love Theme
-    prog("ILove Main 1",             "Song / Section",         listOf("IV", "I", "ii", "V"),              ILOVE_MAIN_LOVE_THEME, ENDS_ON_V),
     prog("ILove Main 2",             "Song / Section",         listOf("I", "Imaj7", "IV", "V"),           ILOVE_MAIN_LOVE_THEME, ENDS_ON_V),
     prog("ILove Main 3",             "Song / Section",         listOf("I", "ii", "V", "I"),               ILOVE_MAIN_LOVE_THEME, ENDS_ON_I),
 
@@ -106,9 +108,6 @@ val allProgressions: List<ChordProgression> = listOf(
     prog("ILove Climax 2",           "Song / Section",         listOf("I", "IV", "I", "V", "I"),          ILOVE_CLIMAX, ENDS_ON_I),
     prog("ILove Climax 3",           "Song / Section",         listOf("ii", "V", "I", "IV", "I"),         ILOVE_CLIMAX, ENDS_ON_I),
 
-    // Song / Section — Comedy Verse
-    prog("Comedy Verse 1",           "Song / Section",         listOf("I", "IV", "V"),                    COMEDY_VERSE, ENDS_ON_V),
-
     // Song / Section — Comedy Bridge
     prog("Comedy Bridge 2",          "Song / Section",         listOf("vi", "ii", "IV", "V"),             COMEDY_BRIDGE, ENDS_ON_V),
     prog("Comedy Bridge 3",          "Song / Section",         listOf("I", "IV", "I", "ii", "V"),         COMEDY_BRIDGE, ENDS_ON_V),
@@ -121,43 +120,43 @@ val allProgressions: List<ChordProgression> = listOf(
 
 fun progressionsByTag(tag: ProgressionTag): List<List<String>> =
     allProgressions
-        .filter { tag in it.tags && LONG_CHORD !in it.tags }
+        .filter { tag in it.tags }
         .map { it.romanNumerals }
 
 fun progressionsWithoutTag(tag: ProgressionTag): List<List<String>> =
     allProgressions
-        .filter { tag !in it.tags && LONG_CHORD !in it.tags }
+        .filter { tag !in it.tags }
         .map { it.romanNumerals }
 
 fun progressionsExcluding(excluded: List<String>): List<List<String>> =
     allProgressions
-        .filter { LONG_CHORD !in it.tags && it.romanNumerals != excluded }
+        .filter { it.romanNumerals != excluded }
         .map { it.romanNumerals }
 
 fun progressionsByTagExcluding(tag: ProgressionTag, vararg excluded: List<String>): List<List<String>> =
     allProgressions
-        .filter { tag in it.tags && LONG_CHORD !in it.tags && it.romanNumerals !in excluded }
+        .filter { tag in it.tags && it.romanNumerals !in excluded }
         .map { it.romanNumerals }
 
 fun progressionsByTagFull(tag: ProgressionTag): List<ChordProgression> =
     allProgressions
-        .filter { tag in it.tags && LONG_CHORD !in it.tags }
+        .filter { tag in it.tags }
 
 fun progressionsByTagExcludingFull(tag: ProgressionTag, vararg excluded: List<String>): List<ChordProgression> =
     allProgressions
-        .filter { tag in it.tags && LONG_CHORD !in it.tags && it.romanNumerals !in excluded }
+        .filter { tag in it.tags && it.romanNumerals !in excluded }
 
 fun progressionsWithoutTagFull(tag: ProgressionTag): List<ChordProgression> =
     allProgressions
-        .filter { tag !in it.tags && LONG_CHORD !in it.tags }
+        .filter { tag !in it.tags }
 
 fun progressionsExcludingFull(excluded: List<String>): List<ChordProgression> =
     allProgressions
-        .filter { LONG_CHORD !in it.tags && it.romanNumerals != excluded }
+        .filter { it.romanNumerals != excluded }
 
 fun progressionsExcludingManyFull(vararg excluded: List<String>): List<ChordProgression> =
     allProgressions
-        .filter { LONG_CHORD !in it.tags && it.romanNumerals !in excluded }
+        .filter { it.romanNumerals !in excluded }
 
 val majorKeys = listOf("C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B")
 

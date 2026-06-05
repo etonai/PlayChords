@@ -1,6 +1,6 @@
 # DevCycle 2026-020: Comedy Song Verse Constraint
 
-**Status:** Planning
+**Status:** Verified
 **Start Date:** 2026-06-04
 **Target Completion:** 2026-06-04
 **Focus:** Tighten the Comedy Song verse selection so it cannot land on a resolving progression.
@@ -22,9 +22,9 @@ Currently the Verse pool in `ComedyGenerator` only requires that the verse diffe
 
 ### Phase 1: Add ENDS_ON_I Exclusion to Verse Selection
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] In `ComedyGenerator.generate()`, change the verse selection to also exclude `ENDS_ON_I` progressions
+- [x] In `ComedyGenerator.generate()`, change the verse selection to also exclude `ENDS_ON_I` progressions
 
 Current:
 ```kotlin
@@ -48,21 +48,21 @@ File: `app/src/main/java/com/playchords/data/ComedyGenerator.kt`
 
 ### Phase 2: Build and Verify
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Run `.\gradlew assembleDebug` — confirm BUILD SUCCESSFUL
-- [ ] Run `.\gradlew testDebugUnitTest` — confirm all tests pass
+- [x] Run `.\gradlew assembleDebug` — confirm BUILD SUCCESSFUL
+- [x] Run `.\gradlew testDebugUnitTest` — confirm all tests pass
 
 ---
 
 ### Phase 3: Add Chord Progressions
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Add `I/bVII` to `ChordMapper.keyMap` for all 12 keys
-- [ ] Add `III7/vi` to `ChordMapper.keyMap` for all 12 keys
-- [ ] Add `I → I/bVII → IV → ii7` to `ChordProgressions.kt`
-- [ ] Add `I → III7/vi → vi → IV` to `ChordProgressions.kt`
+- [x] Add `I/bVII` to `ChordMapper.keyMap` for all 12 keys
+- [x] Add `III7/vi` to `ChordMapper.keyMap` for all 12 keys
+- [x] Add `I → I/bVII → IV → ii7` to `ChordProgressions.kt`
+- [x] Add `I → III7/vi → vi → IV` to `ChordProgressions.kt`
 
 Proposed ChordMapper entries for `I/bVII` (I chord with flat-seventh bass):
 ```
@@ -96,32 +96,20 @@ Files: `ChordMapper.kt`, `ChordProgressions.kt`
 
 ---
 
-### Phase 4: Bump Version to 20.0
+### Phase 4: Version Update
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Update `versionCode` and `versionName` in `app/build.gradle.kts` to match DC 20
-
-Proposed values:
-```
-versionCode = 20
-versionName = "20.0"
-```
-
-**Technical Notes:**
-
-File: `app/build.gradle.kts`
-
-Version is kept in sync with the DevCycle number so the installed build always reflects which cycle it was produced from.
+**Note:** Version updated manually by user to align with DC 20. `versionName = "1.0.20.0"` in `app/build.gradle.kts`.
 
 ---
 
 ### Phase 5: Build and Verify
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Run `.\gradlew assembleDebug` — confirm BUILD SUCCESSFUL
-- [ ] Run `.\gradlew testDebugUnitTest` — confirm all tests pass
+- [x] Run `.\gradlew assembleDebug` — confirm BUILD SUCCESSFUL
+- [x] Run `.\gradlew testDebugUnitTest` — confirm all tests pass
 
 ---
 

@@ -14,7 +14,9 @@ object ComedyGenerator {
         val modulatedKey = ChordMapper.keyOneWholeStepHigher(key)!!
 
         val chorus = progressionsWithoutTagFull(ENDS_ON_I).random()
-        val verse = progressionsExcludingFull(chorus.romanNumerals).random()
+        val verse = progressionsWithoutTagFull(ENDS_ON_I)
+            .filter { it.romanNumerals != chorus.romanNumerals }
+            .random()
         val bridge = progressionsByTagExcludingFull(ENDS_ON_V, chorus.romanNumerals, verse.romanNumerals).random()
         val chorusResolution = progressionsByTagExcludingFull(ENDS_ON_I, chorus.romanNumerals, verse.romanNumerals, bridge.romanNumerals).random()
         val verseResolution = progressionsByTagExcludingFull(ENDS_ON_I, chorus.romanNumerals, verse.romanNumerals, bridge.romanNumerals, chorusResolution.romanNumerals).random()
