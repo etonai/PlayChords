@@ -6,7 +6,7 @@ This app also serves as a test bed for ideas around generating chord progression
 
 ## Features
 
-- **73 chord progressions** across five categories: Classic/Standard, Musical Theatre/Jazz, Expressive/Color, Cinematic/Modern, and Song/Section
+- **74 chord progressions** across five categories: Classic/Standard, Musical Theatre/Jazz, Expressive/Color, Cinematic/Modern, and Song/Section
 - **12 major keys**
 - **Tempos** from 50 to 120 BPM, played twice through
 - **Sampled piano audio** via `SoundPool` — four Salamander Grand Piano samples cover all 12 semitones through pitch shifting (Salamander Grand Piano by Alexander Holm, CC-BY 3.0)
@@ -19,7 +19,7 @@ This app also serves as a test bed for ideas around generating chord progression
 ## Screens
 
 1. **Main** — six entry points: Select Progression, Random Progression, Play Chords, Random I Want, Random I Love, Random Comedy Song; app version shown at top
-2. **Select Progression** — scrollable list grouped by category, with tags (CADENTIAL, LIFT, OPEN, PIVOT, COLOR) shown for each progression
+2. **Select Progression** — scrollable list grouped by category, with tags (CADENTIAL, LIFT, OPEN, PIVOT, COLOR) shown for each progression. **OPEN** means the progression is open-ended — there are multiple options for how to end it, including resolving to the I chord.
 3. **Select Key** — grid of the 12 major keys
 4. **Select Tempo** — picker for 8 BPM options (50–120)
 5. **Playback** — shows the current chord large, with progression name, key, BPM, and a scrolling chord bar; Play Again and Back to Main when done
@@ -68,6 +68,12 @@ The comedy song structure is built for maximum harmonic contrast between section
 | Chorus Resolution | Resolution in the modulated key (optional) |
 
 Each section loops independently. The pianist moves between sections as the scene demands.
+
+## Performance Notes
+
+**3-chord progressions:** If the progression should be resolved, end it by playing the I chord one final time before moving on.
+
+**Long progressions:** Some progressions are 6 or 8 chords. If the scene is moving faster than the progression, it is fine to cut it short — trust the scene over the structure.
 
 ## Tech Stack
 
