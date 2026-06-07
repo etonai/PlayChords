@@ -1,0 +1,34 @@
+Thoughts on Dev cycle 22 and beyond
+
+- What if I added chord training?
+Given a Key, find the IV and V chords
+
+- What if I added accompaniment training?
+I can watch Richard Doan videos for accompaniment variations
+https://youtu.be/gRpanBaUsy0?si=aBbZRGaxf7x1AXnq
+
+Like how I can play the bass octave as 1 8 + 8 + 1 8 + 8
+Like how I can play any right hand chord as 1 3 + 5 over and over again
+split chords? Is that what they're called?
+
+Like changing the end V chord into a IV/5 or Vsus chord
+
+Add 7ths
+
+Instead of going straight to the V at the end, do
+I/V V instead
+
+Add an extra ii IV or vi chord before the V
+
+Study up on passing bass notes
+
+
+Having a designated progression that doesn't start on the I, for choruses and bridges
+Maybe Have it vary if you hit regenerate - If the chorus starts on the I already, the next time it should not
+
+
+consider adding tags for StartsOnI StartsOnIV StartsOnV and EndsOnIV
+To make things easier to use tags later
+
+
+
