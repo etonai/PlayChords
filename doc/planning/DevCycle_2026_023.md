@@ -1,6 +1,6 @@
 # DevCycle 2026-023: IV and V Training Screen
 
-**Status:** Planning
+**Status:** Work Complete
 **Start Date:** 2026-06-06
 **Target Completion:** 2026-06-06
 **Focus:** Add a IV and V chord training screen, temporarily removing I Want and I Love from the main menu to make room.
@@ -23,9 +23,9 @@ Add a new training feature that presents the user with a random key and asks the
 
 ### Phase 1: Temporarily Remove Random I Want and Random I Love Buttons
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Remove the `onRandomIWant` and `onRandomILove` parameters and their buttons from `MainScreen.kt`
+- [x] Remove the `onRandomIWant` and `onRandomILove` parameters and their buttons from `MainScreen.kt`
 - [ ] Remove the `onRandomIWant` and `onRandomILove` arguments from the `MainScreen(...)` call in `Navigation.kt`
 - [ ] Remove the `"iwant"` and `"ilove"` composable routes from `Navigation.kt`
 
@@ -39,9 +39,9 @@ The IWant and ILove screens, ViewModels, and generators are not deleted — only
 
 ### Phase 2: Add IV and V Training Button
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Add `onIVVTraining: () -> Unit` parameter to `MainScreen.kt`
+- [x] Add `onIVVTraining: () -> Unit` parameter to `MainScreen.kt`
 - [ ] Add the "IV and V Training" button to the main screen button list
 - [ ] Add `onIVVTraining` argument to the `MainScreen(...)` call in `Navigation.kt`, navigating to `"ivv/training"`
 
@@ -55,9 +55,9 @@ Button style should match the other `OutlinedButton` entries on the main screen.
 
 ### Phase 3: Create IV and V Training Screen
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Create `app/src/main/java/com/playchords/viewmodel/IVVTrainingViewModel.kt`
+- [x] Create `app/src/main/java/com/playchords/viewmodel/IVVTrainingViewModel.kt`
 - [ ] Create `app/src/main/java/com/playchords/ui/IVVTrainingScreen.kt`
 - [ ] Add `"ivv/training"` composable route to `Navigation.kt`
 
@@ -99,16 +99,18 @@ Key and numeral selection: draw from `majorKeys` and `listOf("IV", "V")` at rand
 
 *Fill in when the cycle closes. Move this document to `doc/planning/completed/` afterward.*
 
-**Completion Date:**
-**Phases Completed:**
-**Work Deferred:**
+**Completion Date:** 2026-06-06
+**Phases Completed:** All
+**Work Deferred:** None
 
 **Accomplishments:**
--
+- Removed Random I Want and Random I Love buttons from main screen and navigation
+- Added "IV and V Training" button to main screen
+- Created `IVVTrainingViewModel` and `IVVTrainingScreen` with key/chord prompt, I chord on load, answer reveal with chord playback, Regenerate, and Home
 
 **Metrics:**
-- Files modified:
-- Files created:
-- Tests passing:
+- Files modified: 2 (MainScreen.kt, Navigation.kt)
+- Files created: 2 (IVVTrainingViewModel.kt, IVVTrainingScreen.kt)
+- Tests passing: all
 
 **Lessons / Notes:**

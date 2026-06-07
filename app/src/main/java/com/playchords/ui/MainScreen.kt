@@ -18,9 +18,8 @@ fun MainScreen(
     onSelectProgression: () -> Unit,
     onRandomProgression: () -> Unit,
     onPlayChords: () -> Unit,
-    onRandomIWant: () -> Unit,
-    onRandomILove: () -> Unit,
-    onRandomComedy: () -> Unit
+    onRandomComedy: () -> Unit,
+    onIVVTraining: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -102,34 +101,6 @@ fun MainScreen(
             }
 
             OutlinedButton(
-                onClick = onRandomIWant,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp)
-            ) {
-                Text(
-                    text = "Random I Want",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-
-            OutlinedButton(
-                onClick = onRandomILove,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp)
-            ) {
-                Text(
-                    text = "Random I Love",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-
-            OutlinedButton(
                 onClick = onRandomComedy,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -137,6 +108,20 @@ fun MainScreen(
             ) {
                 Text(
                     text = "Random Comedy Song",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            OutlinedButton(
+                onClick = onIVVTraining,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Text(
+                    text = "IV and V Training",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary

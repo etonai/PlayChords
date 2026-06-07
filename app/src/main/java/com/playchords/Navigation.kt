@@ -8,8 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.playchords.ui.*
 import com.playchords.viewmodel.ChordPlayerViewModel
 import com.playchords.viewmodel.ComedyViewModel
-import com.playchords.viewmodel.ILoveViewModel
-import com.playchords.viewmodel.IWantViewModel
+import com.playchords.viewmodel.IVVTrainingViewModel
 import com.playchords.viewmodel.PlaybackViewModel
 import com.playchords.viewmodel.SelectionViewModel
 
@@ -32,15 +31,20 @@ fun PlayChordsNavHost() {
                 onPlayChords = {
                     navController.navigate("play/chords")
                 },
-                onRandomIWant = {
-                    navController.navigate("iwant")
-                },
-                onRandomILove = {
-                    navController.navigate("ilove")
-                },
                 onRandomComedy = {
                     navController.navigate("comedy")
+                },
+                onIVVTraining = {
+                    navController.navigate("ivv/training")
                 }
+            )
+        }
+
+        composable("ivv/training") {
+            val ivvTrainingViewModel: IVVTrainingViewModel = viewModel()
+            IVVTrainingScreen(
+                viewModel = ivvTrainingViewModel,
+                onBack = { navController.popBackStack() }
             )
         }
 
@@ -48,22 +52,6 @@ fun PlayChordsNavHost() {
             val comedyViewModel: ComedyViewModel = viewModel()
             ComedyScreen(
                 viewModel = comedyViewModel,
-                onBack = { navController.popBackStack() }
-            )
-        }
-
-        composable("ilove") {
-            val iLoveViewModel: ILoveViewModel = viewModel()
-            ILoveScreen(
-                viewModel = iLoveViewModel,
-                onBack = { navController.popBackStack() }
-            )
-        }
-
-        composable("iwant") {
-            val iWantViewModel: IWantViewModel = viewModel()
-            IWantScreen(
-                viewModel = iWantViewModel,
                 onBack = { navController.popBackStack() }
             )
         }
