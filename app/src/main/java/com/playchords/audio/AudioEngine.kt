@@ -110,7 +110,7 @@ class AudioEngine(context: Context) {
 
         // Bass note one octave below chord tones (rate 0.5 = one octave down)
         parsed.bassSemitone?.let { bass ->
-            playNote(bass, 0.5f, 0.7f)
+            playNote(bass, 0.5f, 1.0f)
         }
 
         // All chord tones voiced in octave 4

@@ -46,10 +46,18 @@ class IVVTrainingViewModel(application: Application) : AndroidViewModel(applicat
         playChord(_targetChordName.value)
     }
 
+    private fun withBassRoot(chordName: String): String {
+        val root = if (chordName.length >= 2 && (chordName[1] == '#' || chordName[1] == 'b'))
+            chordName.substring(0, 2)
+        else
+            chordName.substring(0, 1)
+        return "$chordName/$root"
+    }
+
     private fun playChord(chordName: String) {
         playJob?.cancel()
         playJob = viewModelScope.launch(Dispatchers.IO) {
-            audioEngine.playChord(chordName, 2000L)
+            audioEngine.playChord(withBassRoot(chordName), 2000L)
         }
     }
 
