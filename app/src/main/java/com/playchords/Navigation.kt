@@ -11,6 +11,7 @@ import com.playchords.viewmodel.ComedyViewModel
 import com.playchords.viewmodel.IVVTrainingViewModel
 import com.playchords.viewmodel.PlaybackViewModel
 import com.playchords.viewmodel.SelectionViewModel
+import com.playchords.viewmodel.VChordEndingsViewModel
 
 @Composable
 fun PlayChordsNavHost() {
@@ -36,6 +37,9 @@ fun PlayChordsNavHost() {
                 },
                 onIVVTraining = {
                     navController.navigate("ivv/training")
+                },
+                onVChordEndings = {
+                    navController.navigate("vchordendings")
                 }
             )
         }
@@ -44,6 +48,14 @@ fun PlayChordsNavHost() {
             val ivvTrainingViewModel: IVVTrainingViewModel = viewModel()
             IVVTrainingScreen(
                 viewModel = ivvTrainingViewModel,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable("vchordendings") {
+            val vChordEndingsViewModel: VChordEndingsViewModel = viewModel()
+            VChordEndingsScreen(
+                viewModel = vChordEndingsViewModel,
                 onBack = { navController.popBackStack() }
             )
         }

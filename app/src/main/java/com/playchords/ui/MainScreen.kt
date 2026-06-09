@@ -19,7 +19,8 @@ fun MainScreen(
     onRandomProgression: () -> Unit,
     onPlayChords: () -> Unit,
     onRandomComedy: () -> Unit,
-    onIVVTraining: () -> Unit
+    onIVVTraining: () -> Unit,
+    onVChordEndings: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -122,6 +123,20 @@ fun MainScreen(
             ) {
                 Text(
                     text = "IV and V Training",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            OutlinedButton(
+                onClick = onVChordEndings,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Text(
+                    text = "V Chord Endings",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary
