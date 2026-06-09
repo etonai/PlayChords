@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.playchords.ui.theme.MutedText
 import com.playchords.viewmodel.VChordEndingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -21,7 +22,8 @@ fun VChordEndingsScreen(
     onBack: () -> Unit
 ) {
     val progressionName by viewModel.progressionName
-    val progressionNumerals by viewModel.progressionNumerals
+    val key by viewModel.key
+    val progressionChords by viewModel.progressionChords
     val instruction by viewModel.instruction
 
     Scaffold(
@@ -60,7 +62,14 @@ fun VChordEndingsScreen(
             )
 
             Text(
-                text = progressionNumerals,
+                text = "Key of $key",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MutedText,
+                textAlign = TextAlign.Center
+            )
+
+            Text(
+                text = progressionChords,
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.onBackground,
