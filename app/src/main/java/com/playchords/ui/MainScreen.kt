@@ -73,18 +73,21 @@ fun MainScreen(
                 )
             }
 
-            OutlinedButton(
-                onClick = onRandomProgression,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp)
-            ) {
-                Text(
-                    text = "Random Progression",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.primary
-                )
+            // Hidden: may be restored in a future cycle
+            if (false) {
+                OutlinedButton(
+                    onClick = onRandomProgression,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp)
+                ) {
+                    Text(
+                        text = "Random Progression",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
 
             OutlinedButton(
